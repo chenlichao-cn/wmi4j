@@ -8,5 +8,38 @@
     <artifactId>wmi4j</artifactId>
     <version>1.0</version>
 
+    <developers>
+        <developer>
+            <id>chenlichao</id>
+            <name>Reacher Chen</name>
+            <email>reacher-chen@163.com</email>
+            <url>http://www.chenlichao.cn</url>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.glassfish.main.external</groupId>
+            <artifactId>j-interop-repackaged</artifactId>
+            <version>4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.13</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+
+    </dependencies>
 
 </project>
