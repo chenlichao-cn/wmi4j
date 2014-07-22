@@ -20,11 +20,10 @@ package org.wmi4j;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
- * Created by chenlichao on 14-7-17.
+ * Created by chenlichao on 14-7-22.
  */
-public class SWbemNamedValueSet extends ScriptingObject{
-
-    SWbemNamedValueSet(IJIDispatch dispatch) {
+public class SWbemObject extends ScriptingObject {
+    SWbemObject(IJIDispatch dispatch) {
         super(dispatch);
     }
 }

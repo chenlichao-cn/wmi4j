@@ -17,32 +17,61 @@
 
 package org.wmi4j;
 
+import org.jinterop.dcom.common.IJIUnreferenced;
 import org.jinterop.dcom.common.JIException;
+import org.jinterop.dcom.core.IJIComObject;
+import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.JIObjectFactory;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ * Abstract class of WMI objects
  * Created by chenlichao on 14-7-17.
  */
-class ScriptingObject {
+abstract class ScriptingObject {
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
 
     protected IJIDispatch dispatch;
 
-    ScriptingObject(IJIDispatch dispatch) {
+    ScriptingObject(final IJIDispatch dispatch) {
         this.dispatch = dispatch;
+        this.dispatch.registerUnreferencedHandler(new IJIUnreferenced() {
+
+            @Override
+            public void unReferenced() {
+                logger.info("{}对象引用数为0，将被垃圾回收.", dispatch);
+            }
+
+        });
+    }
+
+    IJIDispatch getDispatch() {
+        return dispatch;
     }
 
     @SuppressWarnings("unchecked")
     protected <T> T callMethod(Class<? extends ScriptingObject> returnType, String methodName, Object ...params) throws WMIException {
+        logger.debug("Execute {}.{}.{} method...", this.getClass().getSimpleName(), methodName, formatParams(params));
         T retVal = null;
 
         try {
             JIVariant[] results = dispatch.callMethodA(methodName, params);
-            IJIDispatch returnDispatch = (IJIDispatch) JIObjectFactory.narrowObject(results[0].getObjectAsComObject());
-            retVal = (T) returnType.getConstructor(IJIDispatch.class).newInstance(returnDispatch);
+            IJIComObject comObject = JIObjectFactory.narrowObject(results[0].getObjectAsComObject());
+
+            IJIDispatch resultDispatch = null;
+            if(IJIDispatch.IID.equalsIgnoreCase(comObject.getInterfaceIdentifier())) {
+                resultDispatch = (IJIDispatch)comObject;
+            } else {
+                IJIComObject d = JIObjectFactory.narrowObject(comObject.queryInterface(IJIDispatch.IID));
+                resultDispatch = (IJIDispatch)d;
+            }
+            retVal = (T) returnType.getDeclaredConstructor(IJIDispatch.class).newInstance(resultDispatch);
         } catch (JIException e) {
             throw new WMIException(e);
         } catch (InvocationTargetException e) {
@@ -56,5 +85,19 @@ class ScriptingObject {
         }
 
         return retVal;
+    }
+
+    private Object[] formatParams(Object[] ps) {
+        Object[] result = new Object[ps.length];
+        for(int i=0; i<result.length; i++) {
+            if(ps[i] instanceof JIString) {
+                result[i] = ((JIString)ps[i]).getString();
+            } else if(JIVariant.OPTIONAL_PARAM().toString().equals(ps[i].toString())) {
+                result[i] = null;
+            } else {
+                result[i] = ps[i];
+            }
+        }
+        return result;
     }
 }
