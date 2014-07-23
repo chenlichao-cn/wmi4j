@@ -20,9 +20,10 @@ package org.wmi4j;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
+ * TODO Implement
  * Created by chenlichao on 14-7-17.
  */
-public class SWbemNamedValueSet extends ScriptingObject{
+public class SWbemNamedValueSet extends AbstractScriptingObject {
 
     SWbemNamedValueSet(IJIDispatch dispatch) {
         super(dispatch);

@@ -33,22 +33,48 @@ import java.lang.reflect.InvocationTargetException;
  * Abstract class of WMI objects
  * Created by chenlichao on 14-7-17.
  */
-abstract class ScriptingObject {
+abstract class AbstractScriptingObject {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     protected IJIDispatch dispatch;
 
-    ScriptingObject(final IJIDispatch dispatch) {
+    AbstractScriptingObject(final IJIDispatch dispatch) {
         this.dispatch = dispatch;
         this.dispatch.registerUnreferencedHandler(new IJIUnreferenced() {
 
             @Override
             public void unReferenced() {
-                logger.info("{}对象引用数为0，将被垃圾回收.", dispatch);
+                try {
+                    dispatch.addRef();
+                    logger.debug("Add reference to {}", dispatch);
+                } catch (JIException e) {
+                    logger.warn("Exception occurred when add reference to dispatch.", e);
+                }
             }
 
         });
+    }
+
+    /**
+     * The security property is used to read, or set the security settings.
+     * This property is an {@link SWbemSecurity} object. The security settings in this object do not indicate the authentication,
+     * impersonation, or privilege settings made on a connection to Windows Management Instrumentation (WMI),
+     * or the security in effect for the proxy when an object is delivered to a sink in an asynchronous call.
+     * <strong>Note: </strong> Setting the Security_ property of an SWbemObject object to NULL grants unlimited access to everyone all the time.
+     * For more information, see {@link org.wmi4j.SWbemSecurity}.
+     * @return The security settings of this WMI object.
+     * @throws WMIException
+     */
+    public SWbemSecurity getSecurity() throws WMIException {
+        try {
+            JIVariant result = dispatch.get("Security_");
+            IJIComObject comObject = result.getObjectAsComObject();
+            IJIDispatch securityDispatch = (IJIDispatch)JIObjectFactory.narrowObject(comObject);
+            return new SWbemSecurity(securityDispatch);
+        } catch (JIException e) {
+            throw new WMIException(e);
+        }
     }
 
     IJIDispatch getDispatch() {
@@ -56,15 +82,18 @@ abstract class ScriptingObject {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> T callMethod(Class<? extends ScriptingObject> returnType, String methodName, Object ...params) throws WMIException {
+    protected <T> T callMethod(Class<? extends AbstractScriptingObject> returnType, String methodName, Object ...params) throws WMIException {
         logger.debug("Execute {}.{}.{} method...", this.getClass().getSimpleName(), methodName, formatParams(params));
-        T retVal = null;
+        T retVal;
 
         try {
             JIVariant[] results = dispatch.callMethodA(methodName, params);
+            if(returnType == null) {
+                return null;
+            }
             IJIComObject comObject = JIObjectFactory.narrowObject(results[0].getObjectAsComObject());
 
-            IJIDispatch resultDispatch = null;
+            IJIDispatch resultDispatch;
             if(IJIDispatch.IID.equalsIgnoreCase(comObject.getInterfaceIdentifier())) {
                 resultDispatch = (IJIDispatch)comObject;
             } else {

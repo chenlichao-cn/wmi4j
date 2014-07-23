@@ -21,10 +21,10 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
  * TODO Implement
- * Created by chenlichao on 14-7-22.
+ * Created by chenlichao on 14-7-23.
  */
-public class SWbemObject extends AbstractScriptingObject {
-    SWbemObject(IJIDispatch dispatch) {
+public class SWbemEventSource extends AbstractScriptingObject {
+    SWbemEventSource(IJIDispatch dispatch) {
         super(dispatch);
     }
 }
