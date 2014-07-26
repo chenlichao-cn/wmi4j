@@ -21,13 +21,10 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
  * TODO Implement
- * Created by chenlichao on 14-7-23.
+ * Created by chenlichao on 14-7-26.
  */
-public class SWbemSecurity {
-
-    private final IJIDispatch dispatch;
-
-    SWbemSecurity(IJIDispatch dispatch) {
-        this.dispatch = dispatch;
+public class SWbemObjectPath extends AbstractScriptingObject {
+    SWbemObjectPath(IJIDispatch dispatch) {
+        super(dispatch);
     }
 }

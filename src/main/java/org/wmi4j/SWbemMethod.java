@@ -20,14 +20,11 @@ package org.wmi4j;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
- * TODO Implement
- * Created by chenlichao on 14-7-23.
+ * todo implement
+ * Created by chenlichao on 14-7-26.
  */
-public class SWbemSecurity {
-
-    private final IJIDispatch dispatch;
-
-    SWbemSecurity(IJIDispatch dispatch) {
-        this.dispatch = dispatch;
+public class SWbemMethod extends AbstractScriptingObject {
+    SWbemMethod(IJIDispatch dispatch) {
+        super(dispatch);
     }
 }

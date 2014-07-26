@@ -15,19 +15,22 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
-
-import org.jinterop.dcom.impls.automation.IJIDispatch;
+package main;
 
 /**
- * TODO Implement
- * Created by chenlichao on 14-7-23.
+ * Created by chenlichao on 14-7-26.
  */
-public class SWbemSecurity {
+public class Main {
 
-    private final IJIDispatch dispatch;
+    public static void main(String[] args) {
+        System.out.println(SupperClass.class.isAssignableFrom(Boolean.class));
+    }
 
-    SWbemSecurity(IJIDispatch dispatch) {
-        this.dispatch = dispatch;
+    private static class SupperClass {
+        protected String name = "supperClass";
+    }
+
+    private static class SubClass extends SupperClass{
+
     }
 }

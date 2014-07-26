@@ -27,10 +27,10 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
  * You can get an SWbemObjectSet object by calling any of the following methods or their asynchronous equivalents:
  *
  * <ul>
- *     <li>SWbemObject.Associators_</li> TODO link
- *     <li>SWbemObject.Instances_</li> TODO link
- *     <li>SWbemObject.References_</li> TODO link
- *     <li>SWbemObject.Subclasses_</li> TODO link
+ *     <li>{@link org.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, java.util.List, SWbemNamedValueSet) SWbemObject.associators}</li>
+ *     <li>{@link org.wmi4j.SWbemObject#instances(java.util.List, SWbemNamedValueSet) SWbemObject.instances}</li>
+ *     <li>{@link org.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, java.util.List, SWbemNamedValueSet) SWbemObject.references}</li>
+ *     <li>{@link org.wmi4j.SWbemObject#subclasses(java.util.List, SWbemNamedValueSet) SWbemObject.subclasses}</li>
  *     <li>{@link org.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, java.util.List, SWbemNamedValueSet) SWbemService.associatorsOf}</li>
  *     <li>{@linkplain org.wmi4j.SWbemServices#execQuery(String, String, java.util.List, SWbemNamedValueSet) SWbemServices.execQuery}</li>
  *     <li>{@linkplain org.wmi4j.SWbemServices#instancesOf(String, java.util.List, SWbemNamedValueSet) SWbemServices.instancesOf}</li>

@@ -35,9 +35,9 @@ import java.lang.reflect.InvocationTargetException;
  */
 abstract class AbstractScriptingObject {
 
-    protected Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected IJIDispatch dispatch;
+    final IJIDispatch dispatch;
 
     AbstractScriptingObject(final IJIDispatch dispatch) {
         this.dispatch = dispatch;
@@ -61,8 +61,8 @@ abstract class AbstractScriptingObject {
      * This property is an {@link SWbemSecurity} object. The security settings in this object do not indicate the authentication,
      * impersonation, or privilege settings made on a connection to Windows Management Instrumentation (WMI),
      * or the security in effect for the proxy when an object is delivered to a sink in an asynchronous call.
-     * <strong>Note: </strong> Setting the Security_ property of an SWbemObject object to NULL grants unlimited access to everyone all the time.
-     * For more information, see {@link org.wmi4j.SWbemSecurity}.
+     * <p><strong>Note: </strong> Setting the Security_ property of an SWbemObject object to NULL grants unlimited access to everyone all the time.
+     * For more information, see {@link org.wmi4j.SWbemSecurity}.</p>
      * @return The security settings of this WMI object.
      * @throws WMIException
      */
@@ -82,25 +82,33 @@ abstract class AbstractScriptingObject {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T> T callMethod(Class<? extends AbstractScriptingObject> returnType, String methodName, Object ...params) throws WMIException {
+    <T> T callMethod(Class<?> returnType, String methodName, Object... params) throws WMIException {
         logger.debug("Execute {}.{}.{} method...", this.getClass().getSimpleName(), methodName, formatParams(params));
-        T retVal;
+        T retVal = null;
 
         try {
             JIVariant[] results = dispatch.callMethodA(methodName, params);
             if(returnType == null) {
                 return null;
             }
-            IJIComObject comObject = JIObjectFactory.narrowObject(results[0].getObjectAsComObject());
+            if(AbstractScriptingObject.class.isAssignableFrom(returnType)) {
+                IJIComObject comObject = JIObjectFactory.narrowObject(results[0].getObjectAsComObject());
 
-            IJIDispatch resultDispatch;
-            if(IJIDispatch.IID.equalsIgnoreCase(comObject.getInterfaceIdentifier())) {
-                resultDispatch = (IJIDispatch)comObject;
+                IJIDispatch resultDispatch;
+                if(IJIDispatch.IID.equalsIgnoreCase(comObject.getInterfaceIdentifier())) {
+                    resultDispatch = (IJIDispatch)comObject;
+                } else {
+                    IJIComObject d = JIObjectFactory.narrowObject(comObject.queryInterface(IJIDispatch.IID));
+                    resultDispatch = (IJIDispatch)d;
+                }
+                retVal = (T) returnType.getDeclaredConstructor(IJIDispatch.class).newInstance(resultDispatch);
             } else {
-                IJIComObject d = JIObjectFactory.narrowObject(comObject.queryInterface(IJIDispatch.IID));
-                resultDispatch = (IJIDispatch)d;
+                if(Boolean.class.equals(returnType)) {
+                    retVal = (T) Boolean.valueOf(results[0].getObjectAsBoolean());
+                } else if(String.class.equals(returnType)) {
+                    retVal = (T) results[0].getObjectAsString2();
+                }
             }
-            retVal = (T) returnType.getDeclaredConstructor(IJIDispatch.class).newInstance(resultDispatch);
         } catch (JIException e) {
             throw new WMIException(e);
         } catch (InvocationTargetException e) {

@@ -17,17 +17,33 @@
 
 package org.wmi4j;
 
-import org.jinterop.dcom.impls.automation.IJIDispatch;
+import config.Config;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-/**
- * TODO Implement
- * Created by chenlichao on 14-7-23.
- */
-public class SWbemSecurity {
+import static org.junit.Assert.*;
 
-    private final IJIDispatch dispatch;
+public class SWbemServicesTest {
 
-    SWbemSecurity(IJIDispatch dispatch) {
-        this.dispatch = dispatch;
+    private static SWbemLocator locator;
+    private static SWbemServices services;
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        locator = new SWbemLocator(Config.getServer(),Config.getUsername(), Config.getPassword(), "root\\cimv2");
+        services = locator.connectServer();
     }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+        locator.disconnect();
+    }
+
+    @Test
+    public void testGet() throws Exception {
+        SWbemObject object = services.get("Win32_Service.Name='Dnscache'");
+        assertNotNull(object);
+    }
+
 }

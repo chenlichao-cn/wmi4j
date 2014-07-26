@@ -23,18 +23,19 @@ import org.apache.commons.lang3.StringUtils;
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
+import org.wmi4j.consts.Flags;
 
 import java.util.List;
 
 /**
  * <p>You can use the methods of an SWbemServices object to perform operations against a namespace
  * on either a local host or a remote host. SWbemServices object can be initialized by call
- * {@linkplain org.wmi4j.SWbemLocator#connectServer(String, String, org.wmi4j.SWbemLocator.SecurityFlag, SWbemNamedValueSet) SWbemLocator.connectServer()}
+ * {@linkplain org.wmi4j.SWbemLocator#connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet) SWbemLocator.connectServer()}
  * method only.</p>
  * Created by chenlichao on 14-7-17.
  */
 public class SWbemServices extends AbstractScriptingObject {
-    //TODO 异步方法实现
+    //TODO Implement async methods
     SWbemServices(IJIDispatch dispatch) {
         super(dispatch);
     }
@@ -73,25 +74,25 @@ public class SWbemServices extends AbstractScriptingObject {
      *                          If specified, this parameter indicates that the returned endpoints must include
      *                          the specified qualifier.
      * @param flags <strong>[Optional]</strong> Integer that specifies additional flags to the operation.
-     *              The default value for this parameter is {@linkplain AssociatorsOfFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
+     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.AssociatorsFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
      *              which calls the method in the semisynchronous mode. This parameter can accept the following values.
      * @param objwbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
      *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return
+     * @return If successful a {@link org.wmi4j.SWbemObjectSet} will be returned.
      * @throws WMIException
      */
     public SWbemObjectSet associatorsOf(String objectPath, String assocClass, String resultClass,
               String resultRole, String role, Boolean classesOnly, Boolean schemaOnly, String requiredAssocQualifier,
-              String requiredQualifier, List<AssociatorsOfFlag> flags, SWbemNamedValueSet objwbemNamedValueSet) throws WMIException {
+              String requiredQualifier, List<Flags.AssociatorsFlag> flags, SWbemNamedValueSet objwbemNamedValueSet) throws WMIException {
         if(StringUtils.isEmpty(objectPath)) {
             throw new IllegalArgumentException("Object path is empty.");
         }
         Integer iFlags = null;
         if(flags != null) {
-            for(AssociatorsOfFlag flag : flags) {
+            for(Flags.AssociatorsFlag flag : flags) {
                 if(iFlags == null) {
                     iFlags = flag.getValue();
                 } else {
@@ -191,8 +192,8 @@ public class SWbemServices extends AbstractScriptingObject {
     /**
      * Use default parameters for method {@link #execMethod(String, String, SWbemObject, Integer, SWbemNamedValueSet)}
      */
-    public SWbemObject execMethod(String objectPath, String methodName) throws WMIException {
-        return execMethod(objectPath, methodName, null, null, null);
+    public SWbemObject execMethod(String objectPath, String methodName, SWbemObject inParameters) throws WMIException {
+        return execMethod(objectPath, methodName, inParameters, null, null);
     }
 
     /**
@@ -246,7 +247,7 @@ public class SWbemServices extends AbstractScriptingObject {
      *                    and the <a href="http://msdn.microsoft.com/en-us/library/aa394606(v=vs.85).aspx" target="_blank">WQL reference</a>.
      * @param queryLanguage <strong>[Optional]</strong> String that contains the query language to be used. If specified, this value must be "WQL".
      * @param flags <strong>[Optional]</strong> Integer that determines the behavior of the query and determines whether this call returns immediately.
-     *              The default value for this parameter is {@linkplain org.wmi4j.SWbemServices.ExecQueryFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
+     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.ExecQueryFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
      *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
@@ -255,7 +256,7 @@ public class SWbemServices extends AbstractScriptingObject {
      * @return If no error occurs, this method returns an {@link SWbemObjectSet} object. This is an object collection that contains the result set of the query.
      * @throws WMIException
      */
-    public SWbemObjectSet execQuery(String queryString, String queryLanguage, List<ExecQueryFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet execQuery(String queryString, String queryLanguage, List<Flags.ExecQueryFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
         if(StringUtils.isEmpty(queryString)) {
             throw new IllegalArgumentException("QueryString is empty.");
         }
@@ -264,7 +265,7 @@ public class SWbemServices extends AbstractScriptingObject {
         }
         Integer iFlags = null;
         if(flags != null) {
-            for(ExecQueryFlag flag : flags) {
+            for(Flags.ExecQueryFlag flag : flags) {
                 if(iFlags == null) {
                     iFlags = flag.getValue();
                 } else {
@@ -300,10 +301,10 @@ public class SWbemServices extends AbstractScriptingObject {
      * @return If successful, this method returns an {@link SWbemObject} object that represents the requested object.
      * @throws WMIException
      */
-    public SWbemObject get(String objectPath, List<GetFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException{
+    public SWbemObject get(String objectPath, List<Flags.GetFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException{
         Integer iFlags = null;
         if(flags != null) {
-            for(GetFlag flag : flags) {
+            for(Flags.GetFlag flag : flags) {
                 if(iFlags == null) {
                     iFlags = flag.getValue();
                 } else {
@@ -331,7 +332,7 @@ public class SWbemServices extends AbstractScriptingObject {
      * {@linkplain #execQuery(String, String, java.util.List, SWbemNamedValueSet) SWbemService.execQuery} method.
      * @param className String that contains the name of the class for which instances are desired. This parameter cannot be blank.
      * @param flags This parameter determines how detailed the call enumerates and if this call returns immediately.
-     *              The default value for this parameter is {@linkplain org.wmi4j.SWbemServices.InstancesOfFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
+     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.InstancesFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
      *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
@@ -340,13 +341,13 @@ public class SWbemServices extends AbstractScriptingObject {
      * @return If successful, the method returns an {@link SWbemObjectSet}.
      * @throws WMIException
      */
-    public SWbemObjectSet instancesOf(String className, List<InstancesOfFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet instancesOf(String className, List<Flags.InstancesFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
         if(StringUtils.isEmpty(className)) {
             throw new IllegalArgumentException("Class name is empty.");
         }
         Integer iFlags = null;
         if(flags != null) {
-            for(InstancesOfFlag flag : flags) {
+            for(Flags.InstancesFlag flag : flags) {
                 if(iFlags == null) {
                     iFlags = flag.getValue();
                 } else {
@@ -390,25 +391,25 @@ public class SWbemServices extends AbstractScriptingObject {
      *                          If specified, this parameter indicates that the returned endpoints must include
      *                          the specified qualifier.
      * @param flags <strong>[Optional]</strong> Integer that specifies additional flags to the operation.
-     *              The default value for this parameter is {@linkplain ReferenceToFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
+     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.ReferenceFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
      *              which calls the method in the semisynchronous mode. This parameter can accept the following values.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
      *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return
+     * @return If successful a {@link org.wmi4j.SWbemObjectSet} will be returned.
      * @throws WMIException
      */
     public SWbemObjectSet referencesTo(String objectPath, String resultClass, String role,
                                        Boolean classesOnly, Boolean schemaOnly, String requiredQualifier,
-                                       List<ReferenceToFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+                                       List<Flags.ReferenceFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
         if(isEmpty(objectPath)) {
             throw new IllegalArgumentException("Object path is empty.");
         }
         Integer iFlags = null;
         if(flags != null) {
-            for(ReferenceToFlag flag : flags) {
+            for(Flags.ReferenceFlag flag : flags) {
                 if(iFlags == null) {
                     iFlags = flag.getValue();
                 } else {
@@ -441,25 +442,25 @@ public class SWbemServices extends AbstractScriptingObject {
      *
      * @param superClass <strong>[Optional]</strong> Specifies a parent class name.
      *                   Only subclasses of this class return in the enumerator.
-     *                   If you leave this parameter blank, and if flags is {@link org.wmi4j.SWbemServices.SubclassesOfFlag#wbemQueryFlagShallow wbemQueryFlagShallow},
+     *                   If you leave this parameter blank, and if flags is {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagShallow wbemQueryFlagShallow},
      *                   only the top-level classes are returned (that is, classes that have no parent class).
-     *                   If this parameter is blank and flags is {@link org.wmi4j.SWbemServices.SubclassesOfFlag#wbemQueryFlagDeep wbemQueryFlagDeep},
+     *                   If this parameter is blank and flags is {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagDeep wbemQueryFlagDeep},
      *                   all classes within the namespace are returned.
      * @param flags <strong>[Optional]</strong> Determines how detailed the call enumerates.
-     *              The default values for this parameter are {@link org.wmi4j.SWbemServices.SubclassesOfFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}
-     *              and {@link org.wmi4j.SWbemServices.SubclassesOfFlag#wbemQueryFlagDeep wbemQueryFlagDeep}.
+     *              The default values for this parameter are {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}
+     *              and {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagDeep wbemQueryFlagDeep}.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
      *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return
+     * @return If successful a {@link org.wmi4j.SWbemObjectSet} will be returned.
      * @throws WMIException
      */
-    public SWbemObjectSet subclassesOf(String superClass, List<SubclassesOfFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet subclassesOf(String superClass, List<Flags.SubclassesFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
-            for(SubclassesOfFlag flag : flags) {
+            for(Flags.SubclassesFlag flag : flags) {
                 if(iFlags == null) {
                     iFlags = flag.getValue();
                 } else {
@@ -471,242 +472,5 @@ public class SWbemServices extends AbstractScriptingObject {
                 (isEmpty(superClass)) ? JIVariant.OPTIONAL_PARAM() : new JIString(superClass),
                 (iFlags == null) ? JIVariant.OPTIONAL_PARAM() : iFlags,
                 (objWbemNamedValueSet == null) ? JIVariant.OPTIONAL_PARAM() : objWbemNamedValueSet.getDispatch());
-    }
-
-    /**
-     * Optional values for flags parameter of
-     * {@linkplain #get(String, List, SWbemNamedValueSet) SWbemServices.get()} method.
-     */
-    public enum GetFlag{
-        /**
-         * Causes WMI to return class amendment data with the base class definition.
-         */
-        wbemFlagUseAmendedQualifiers(0x20000);
-
-        private int value;
-        GetFlag(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    /**
-     * Optional values for flags parameter of
-     * {@linkplain #instancesOf(String, List, SWbemNamedValueSet) SWbemServices.instancesOf()} method.
-     */
-    public enum InstancesOfFlag {
-        /**
-         * 32(0x20): Causes a forward-only enumerator to be returned.
-         * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link SWbemObject#clone()}.
-         */
-        wbemFlagForwardOnly(0x20),
-
-        /**
-         * 0(0x0): Causes WMI to retain pointers to objects of the enumeration until the client releases the enumerator.
-         */
-        wbemFlagBidirectional(0x0),
-
-        /**
-         * 16(0x10): Causes the call to return immediately.
-         */
-        wbemFlagReturnImmediately(0x10),
-
-        /**
-         * 0(0x0): Causes this call to block until the query is complete. This flag calls the method in the synchronous mode.
-         */
-        wbemFlagReturnWhenComplete(0x0),
-
-        /**
-         * 1(0x1): Forces the enumeration to include only immediate subclasses of the specified parent class.
-         */
-        wbemQueryFlagShallow(0x1),
-
-        /**
-         * 0(0x0): Default value for this parameter. This value forces the enumeration to include all classes in the hierarchy.
-         */
-        wbemQueryFlagDeep(0x0),
-
-        /**
-         * 131072(0x20000): Causes WMI to return class amendment data with the base class definition.
-         */
-        wbemFlagUseAmendedQualifiers(0x20000);;
-
-        private int value;
-        InstancesOfFlag(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    /**
-     * Optional values for flags parameter of
-     * {@linkplain #execQuery(String, String, List, SWbemNamedValueSet) SWbemServices.execQuery()} method.
-     */
-    public enum ExecQueryFlag {
-        /**
-         * 32(0x20): Causes a forward-only enumerator to be returned.
-         * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link SWbemObject#clone()}.
-         */
-        wbemFlagForwardOnly(0x20),
-
-        /**
-         * 0(0x0): Causes WMI to retain pointers to objects of the enumeration until the client releases the enumerator.
-         */
-        wbemFlagBidirectional(0x0),
-
-        /**
-         * 16(0x10): Causes the call to return immediately.
-         */
-        wbemFlagReturnImmediately(0x10),
-
-        /**
-         * 0(0x0): Causes this call to block until the query is complete. This flag calls the method in the synchronous mode.
-         */
-        wbemFlagReturnWhenComplete(0x0),
-
-        /**
-         * 2(0x2): Used for prototyping. This flag stops the query from happening and returns an object that looks like a typical result object.
-         */
-        wbemQueryFlagPrototype(0x2),
-
-        /**
-         * 131072(0x20000): Causes WMI to return class amendment data with the base class definition.
-         */
-        wbemFlagUseAmendedQualifiers(0x20000);
-
-        private int value;
-        ExecQueryFlag(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    /**
-     *
-     * Optional values for flags parameter of
-     * {@linkplain #associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, List, SWbemNamedValueSet)} method.
-     *
-     */
-    public enum AssociatorsOfFlag {
-        /**
-         * 32(0x20): Causes a forward-only enumerator to be returned.
-         * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link SWbemObject#clone()}.
-         */
-        wbemFlagForwardOnly(0x20),
-
-        /**
-         * 0(0x0): Causes WMI to retain pointers to objects of the enumeration until the client releases the enumerator.
-         */
-        wbemFlagBidirectional(0x0),
-
-        /**
-         * 16(0x10): Causes the call to return immediately.
-         */
-        wbemFlagReturnImmediately(0x10),
-
-        /**
-         * 0(0x0): Causes this call to block until the query is complete. This flag calls the method in the synchronous mode.
-         */
-        wbemFlagReturnWhenComplete(0x0),
-
-        /**
-         * 131072(0x20000): Causes WMI to return class amendment data with the base class definition.
-         */
-        wbemFlagUseAmendedQualifiers(0x20000);
-        private int value;
-        AssociatorsOfFlag(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    /**
-     * Optional values for parameter flags of {@link #referencesTo(String, String, String, Boolean, Boolean, String, List, SWbemNamedValueSet)}
-     */
-    public enum ReferenceToFlag {
-        /**
-         * 32(0x20): Causes a forward-only enumerator to be returned.
-         * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link SWbemObject#clone()}.
-         */
-        wbemFlagForwardOnly(0x20),
-
-        /**
-         * 0(0x0): Causes WMI to retain pointers to objects of the enumeration until the client releases the enumerator.
-         */
-        wbemFlagBidirectional(0x0),
-
-        /**
-         * 16(0x10): Causes the call to return immediately.
-         */
-        wbemFlagReturnImmediately(0x10),
-
-        /**
-         * 0(0x0): Causes this call to block until the query is complete. This flag calls the method in the synchronous mode.
-         */
-        wbemFlagReturnWhenComplete(0x0),
-
-        /**
-         * 131072(0x20000): Causes WMI to return class amendment data with the base class definition.
-         */
-        wbemFlagUseAmendedQualifiers(0x20000);
-        private int value;
-        ReferenceToFlag(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-    }
-
-    public enum SubclassesOfFlag {
-        /**
-         * 1(0x1): Forces the enumeration to include only immediate subclasses of the specified parent class.
-         */
-        wbemQueryFlagShallow(0x1),
-
-        /**
-         * 0(0x0): Default value for this parameter. This value forces the enumeration to include all classes in the hierarchy.
-         */
-        wbemQueryFlagDeep(0x0),
-        /**
-         * 16(0x10): Causes the call to return immediately.
-         */
-        wbemFlagReturnImmediately(0x10),
-
-        /**
-         * 0(0x0): Causes this call to block until the query is complete. This flag calls the method in the synchronous mode.
-         */
-        wbemFlagReturnWhenComplete(0x0),
-
-        /**
-         * 131072(0x20000): Causes WMI to return class amendment data with the base class definition.
-         */
-        wbemFlagUseAmendedQualifiers(0x20000);
-
-        private int value;
-        SubclassesOfFlag(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
     }
 }

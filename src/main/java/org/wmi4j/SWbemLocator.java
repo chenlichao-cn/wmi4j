@@ -24,6 +24,7 @@ import org.jinterop.dcom.impls.JIObjectFactory;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.wmi4j.consts.Flags;
 
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -47,10 +48,10 @@ public class SWbemLocator {
     private SWbemServices services;
     private IJIDispatch servicesDispatch;
 
-    private String server;
-    private String username;
-    private String password;
-    private String namespace;
+    private final String server;
+    private final String username;
+    private final String password;
+    private final String namespace;
 
     /**
      *
@@ -108,7 +109,7 @@ public class SWbemLocator {
      * @throws WMIException Failed to connect to the server.
      * @throws UnknownHostException
      */
-    public SWbemServices connectServer(String locale, String authority, SecurityFlag securityFlag,
+    public SWbemServices connectServer(String locale, String authority, Flags.SecurityFlag securityFlag,
                                        SWbemNamedValueSet objwbemNamedValueSet) throws WMIException, UnknownHostException {
         if(services != null) {
             return services;
@@ -167,7 +168,19 @@ public class SWbemLocator {
     }
 
     /**
+     * Use default parameters for {@link #connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet)}
+     * @return
+     * @throws WMIException
+     * @throws UnknownHostException
+     */
+    public SWbemServices connectServer() throws WMIException, UnknownHostException {
+        return connectServer(null, null, null, null);
+    }
+
+    /**
      * Obtain {@link org.wmi4j.SWbemServices} object;
+     * <p><strong>Note: </strong>Before call this method, you need call {@link #connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet) connectServer} first,
+     *  to generate SWbemServices object.</p>
      * @return {@link org.wmi4j.SWbemServices} object
      * @exception IllegalStateException If call before connect to the server.
      */
@@ -210,33 +223,6 @@ public class SWbemLocator {
             } else {
               throw new IllegalStateException();
             }
-        }
-    }
-
-    /**
-     * securityFlag parameter of {@linkplain #connectServer(String, String, org.wmi4j.SWbemLocator.SecurityFlag, SWbemNamedValueSet) connectServer()} optional values;
-     */
-    public enum SecurityFlag {
-        /**
-         * A value of 0 for this parameter causes the call to {@linkplain #connectServer(String, String, org.wmi4j.SWbemLocator.SecurityFlag, SWbemNamedValueSet) connectServer()}
-         * to return only after the connection to the server is established.
-         * This could cause your program to stop responding indefinitely if the connection cannot be established.
-         */
-        wbemConnectFlagWhenComplete(0x0),
-        /**
-         * The {@linkplain #connectServer(String, String, org.wmi4j.SWbemLocator.SecurityFlag, SWbemNamedValueSet) connectServer()} call is guaranteed
-         * to return in 2 minutes or less. Use this flag to prevent your program from ceasing to respond indefinitely
-         * if the connection cannot be established.
-         */
-        wbemConnectFlagUseMaxWait(0x80);
-
-        private int value;
-        SecurityFlag(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
         }
     }
 
