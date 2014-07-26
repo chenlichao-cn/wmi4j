@@ -124,6 +124,29 @@ abstract class AbstractScriptingObject {
         return retVal;
     }
 
+    <T> T getProperty(Class<?> returnType, String name) throws WMIException {
+        try {
+            JIVariant result = dispatch.get(name);
+            if(String.class.equals(returnType)) {
+                return (T)result.getObjectAsString2();
+            } else if(Boolean.class.equals(returnType)) {
+                return (T)Boolean.valueOf(result.getObjectAsBoolean());
+            } else if(Integer.class.equals(returnType)) {
+                return (T)Integer.valueOf(result.getObjectAsInt());
+            } else if(AbstractScriptingObject.class.isAssignableFrom(returnType)) {
+                IJIComObject resultObject = result.getObjectAsComObject();
+                IJIDispatch resultDispatch = (IJIDispatch)JIObjectFactory.narrowObject(resultObject.queryInterface(IJIDispatch.IID));
+                return (T) returnType.getDeclaredConstructor(IJIDispatch.class).newInstance(resultDispatch);
+            } else {
+                return (T)new WMIVariant(result);
+            }
+        } catch (JIException e) {
+            throw new WMIException(e);
+        } catch (Exception e) {
+            throw new WMIException(0x01000001, "Unsupported cim type");
+        }
+    }
+
     private Object[] formatParams(Object[] ps) {
         Object[] result = new Object[ps.length];
         for(int i=0; i<result.length; i++) {

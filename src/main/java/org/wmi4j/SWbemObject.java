@@ -18,11 +18,9 @@
 package org.wmi4j;
 
 import org.jinterop.dcom.common.JIException;
-import org.jinterop.dcom.core.IJIComObject;
 import org.jinterop.dcom.core.JIArray;
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
-import org.jinterop.dcom.impls.JIObjectFactory;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 import org.wmi4j.consts.Flags;
 
@@ -50,9 +48,9 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * <p><strong>Note: </strong> {@link org.wmi4j.SWbemObject} cannot be created by yourself.
  * If you want to create a new, empty class use {@link org.wmi4j.SWbemServices#get(String, java.util.List, SWbemNamedValueSet) SWbemServices.get}
  * with an empty path parameter. This call returns an empty {@link org.wmi4j.SWbemObject} object that can become a class.
- * You can then supply a class name for the Class property of the {@link org.wmi4j.SWbemObjectPath} object returned by the Path_ call.  todo link SWbemObjectPath.Path_
- * Add properties to the new class by the Properties_ method. todo link SWbemObjectPath.Properties_
- * To create an instance, call GetObject on the new class.</p> todo link SWbemObjectPath.GetObject
+ * You can then supply a class name for the class property of the {@link org.wmi4j.SWbemObjectPath} object returned by the {@link SWbemObject#getPath()} call.
+ * Add properties to the new class by the properties method.
+ * To create an instance, call GetObject on the new class.</p>
  *
  * Created by chenlichao on 14-7-22.
  */
@@ -522,15 +520,17 @@ public class SWbemObject extends AbstractScriptingObject {
      * @throws WMIException
      */
     public SWbemMethodSet getMethods() throws WMIException {
+        return getProperty(SWbemMethodSet.class, "Methods_");
+    }
 
-        try {
-            JIVariant methods = dispatch.get("Methods_");
-            IJIComObject methodSetObj = methods.getObjectAsComObject();
-            IJIDispatch methodSetDispatch = (IJIDispatch)JIObjectFactory.narrowObject(methodSetObj.queryInterface(IJIDispatch.IID));
-            return new SWbemMethodSet(methodSetDispatch);
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+    /**
+     * Get an {@link org.wmi4j.SWbemObject} object whose properties define the input parameters for the specified method.
+     * @param methodName Name of the method for the in parameters.
+     * @return An {@link org.wmi4j.SWbemObject} object whose properties define the input parameters for the specified method.
+     * @throws WMIException
+     */
+    public SWbemObject getMethodInParameters(String methodName) throws WMIException {
+        return getMethods().item(methodName).getInParameters();
     }
 
     /**
@@ -539,29 +539,22 @@ public class SWbemObject extends AbstractScriptingObject {
      *
      * <h3>Remark</h3>
      *
-     * <p>Only the Class property of the returned {@link org.wmi4j.SWbemObjectPath} instance can be modified. todo link class property
-     * If you try to modify any other property, or try to call the methods SetAsClass or SetAsSingleton, todo link SetAsClass or SetAsSingleton
+     * <p>Only the class property of the returned {@link org.wmi4j.SWbemObjectPath} instance can be modified.
+     * If you try to modify any other property, or try to call the methods {@link SWbemObjectPath#setAsClass()} or {@link SWbemObjectPath#setAsSingleton()}
      * you will get a {@link org.wmi4j.WMIException}.</p>
      * <p>Because of this, you cannot modify the {@link org.wmi4j.SWbemNamedValueSet} object
-     * that is the value of the Keys property of the returned {@link org.wmi4j.SWbemObjectPath} instance.
-     * If you try to call the Add, Remove, or DeleteAll methods on this value, you will get a {@link org.wmi4j.WMIException}. todo link Add Remove DeleteAll
-     * Furthermore, you cannot modify any SWbemNamedValue obtained from this collection.  todo link SWbemNamedValue
-     * Attempts to modify the Value property return the same error code.</p> todo link Value property
+     * that is the value of the keys property of the returned {@link org.wmi4j.SWbemObjectPath} instance.
+     * If you try to call the Add, Remove, or DeleteAll methods on this value, you will get a {@link org.wmi4j.WMIException}.
+     * Furthermore, you cannot modify any {@link org.wmi4j.SWbemNamedValue} obtained from this collection.
+     * Attempts to modify the value property return the same error.</p>
      * <p>However, if you call {@link SWbemObject#wmiClone()} to create a copy,
-     * the SWbemObjectPath.Path property of the copy is fully modifiable.</p> todo link Path property
+     * the SWbemObjectPath.path property of the copy is fully modifiable.</p>
      *
      * @return {@link org.wmi4j.SWbemObjectPath} object that represents the object path of the current class or instance.
      * @throws WMIException
      */
     public SWbemObjectPath getPath() throws WMIException {
-        try {
-            JIVariant pathVar = dispatch.get("Path_");
-            IJIComObject pathObj = pathVar.getObjectAsComObject();
-            IJIDispatch pathDispatch = (IJIDispatch)JIObjectFactory.narrowObject(pathObj.queryInterface(IJIDispatch.IID));
-            return new SWbemObjectPath(pathDispatch);
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        return getProperty(SWbemObjectPath.class, "Path_");
     }
 
     /**
@@ -572,14 +565,17 @@ public class SWbemObject extends AbstractScriptingObject {
      * @throws WMIException
      */
     public SWbemPropertySet getProperties() throws WMIException {
-        try {
-            JIVariant pathVar = dispatch.get("Properties_");
-            IJIComObject pathObj = pathVar.getObjectAsComObject();
-            IJIDispatch pathDispatch = (IJIDispatch)JIObjectFactory.narrowObject(pathObj.queryInterface(IJIDispatch.IID));
-            return new SWbemPropertySet(pathDispatch);
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        return getProperty(SWbemPropertySet.class, "Properties_");
+    }
+
+    /**
+     * Get the variant value of the specified WMI property.
+     * @param propertyName Name of the property.
+     * @return The variant value of the specified WMI property.
+     * @throws WMIException
+     */
+    public WMIVariant getPropertyByName(String propertyName) throws WMIException {
+        return getProperties().item(propertyName).getValue();
     }
 
     /**
@@ -589,13 +585,6 @@ public class SWbemObject extends AbstractScriptingObject {
      * @throws WMIException
      */
     public SWbemQualifierSet getQualifiers() throws WMIException {
-        try {
-            JIVariant pathVar = dispatch.get("Qualifiers_");
-            IJIComObject pathObj = pathVar.getObjectAsComObject();
-            IJIDispatch pathDispatch = (IJIDispatch)JIObjectFactory.narrowObject(pathObj.queryInterface(IJIDispatch.IID));
-            return new SWbemQualifierSet(pathDispatch);
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        return getProperty(SWbemQualifierSet.class, "Qualifiers_");
     }
 }

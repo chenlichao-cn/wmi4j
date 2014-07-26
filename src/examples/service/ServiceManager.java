@@ -17,10 +17,7 @@
 
 package service;
 
-import org.wmi4j.SWbemLocator;
-import org.wmi4j.SWbemObject;
-import org.wmi4j.SWbemServices;
-import org.wmi4j.WMIException;
+import org.wmi4j.*;
 import org.wmi4j.consts.Flags;
 
 import java.net.UnknownHostException;
@@ -44,6 +41,7 @@ public class ServiceManager {
             List<Flags.GetFlag> flags = new ArrayList<Flags.GetFlag>();
             flags.add(Flags.GetFlag.wbemFlagUseAmendedQualifiers);
             SWbemObject object = services.get("Win32_Service.Name='AppMgmt'", null, null);
+
         } catch (WMIException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {

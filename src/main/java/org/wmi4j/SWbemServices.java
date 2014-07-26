@@ -213,7 +213,7 @@ public class SWbemServices extends AbstractScriptingObject {
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
      * @return If no error occurs, this method returns an {@link org.wmi4j.SWbemEventSource} object.
-     * You can call the {SWbemEventSource.NextEvent} method to retrieve events as they arrive. TODO link SWbemEventSource.NextEvent
+     * You can call the {@link SWbemEventSource#nextEvent(Long) SWbemEventSource.nextEvent} method to retrieve events as they arrive.
      * @throws WMIException
      */
     public SWbemEventSource execNotificationQuery(String queryString, String queryLanguage,

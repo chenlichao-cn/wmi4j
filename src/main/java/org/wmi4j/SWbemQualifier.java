@@ -17,14 +17,124 @@
 
 package org.wmi4j;
 
+import org.jinterop.dcom.common.JIException;
+import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
- * todo implement
+ * You can use the properties of the SWbemQualifier object to represent a single qualifier of
+ * a WMI class, instance, property, or method parameter.
+ *
  * Created by chenlichao on 14-7-26.
  */
 public class SWbemQualifier extends AbstractScriptingObject {
     SWbemQualifier(IJIDispatch dispatch) {
         super(dispatch);
+    }
+
+    /**
+     * Get a Boolean value that indicates if this qualifier has been localized using a merge operation.
+     * @return A Boolean value that indicates if this qualifier has been localized using a merge operation.
+     * @throws WMIException
+     */
+    public boolean isAmended() throws WMIException {
+        return (Boolean)getProperty(Boolean.class, "IsAmended");
+    }
+
+    /**
+     * Indicates if this qualifier is local.
+     * @return True if this qualifier is local, false if this qualifier is inherited from supper class;
+     * @throws WMIException
+     */
+    public boolean isLocal() throws WMIException {
+        return (Boolean)getProperty(Boolean.class, "IsLocal");
+    }
+
+    /**
+     * Indicates if this qualifier can be overridden when propagated.
+     * @return True if can be override, otherwise return false.
+     * @throws WMIException
+     */
+    public boolean isOverridable() throws WMIException {
+        return (Boolean)getProperty(Boolean.class, "IsOverridable");
+    }
+
+    /**
+     * Set if this qualifier can be overridden when propagated.
+     * @param isOverridable If can be overridden
+     * @throws WMIException
+     */
+    public void setOverridable(boolean isOverridable) throws WMIException {
+        try {
+            dispatch.put("IsOverridable", new JIVariant(isOverridable));
+        } catch (JIException e) {
+            throw new WMIException(e);
+        }
+    }
+
+    /**
+     * Get the name of this qualifier. This property is read-only.
+     * @return the name of this qualifier.
+     * @throws WMIException
+     */
+    public String getName() throws WMIException {
+        return getProperty(String.class, "Name");
+    }
+
+    /**
+     * Indicates if this qualifier can be propagated to an instance.
+     * @return True if can, otherwise false.
+     * @throws WMIException
+     */
+    public boolean getPropagatesToInstance() throws WMIException {
+        return (Boolean)getProperty(Boolean.class, "PropagatesToInstance");
+    }
+
+    /**
+     * Set if this qualifier can be propagated to an instance.
+     * @param propagatesToInstance True if can be propagated, otherwise false
+     * @throws WMIException
+     */
+    public void setPropagatesToInstance(boolean propagatesToInstance) throws WMIException {
+        try {
+            dispatch.put("PropagatesToInstance", new JIVariant(propagatesToInstance));
+        } catch (JIException e) {
+            throw new WMIException(e);
+        }
+    }
+
+    /**
+     * Indicates if this qualifier can be propagated to an subclass.
+     * @return True if can, otherwise false.
+     * @throws WMIException
+     */
+    public boolean getPropagatesToSubClass() throws WMIException {
+        return (Boolean)getProperty(Boolean.class, "PropagatesToSubClass");
+    }
+
+    /**
+     * Get the variant value of this qualifier.
+     * @return The variant value of this qualifier.
+     * @throws WMIException
+     */
+    public WMIVariant getValue() throws WMIException {
+        try {
+            return new WMIVariant(dispatch.get("Value"));
+        } catch (JIException e) {
+            throw new WMIException(e);
+        }
+    }
+
+    /**
+     * Set the variant value of this qualifier.
+     * @param variant the variant value of this qualifier.
+     * @throws WMIException
+     */
+    public void setValue(WMIVariant variant) throws WMIException {
+        try {
+            dispatch.put("Value", variant.getVariant());
+        } catch (JIException e) {
+            throw new WMIException(e);
+        }
     }
 }

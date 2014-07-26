@@ -17,14 +17,33 @@
 
 package org.wmi4j;
 
+import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
- * TODO Implement
+ * Retrieves events from an event query in conjunction with {@link org.wmi4j.SWbemServices#execNotificationQuery(String, String, Integer, SWbemNamedValueSet) SWbemServices.execNotificationQuery()}.
+ * You get an SWbemEventSource object if you make a call to
+ * {@link org.wmi4j.SWbemServices#execNotificationQuery(String, String, Integer, SWbemNamedValueSet) SWbemServices.execNotificationQuery()}.
+ * to make an event query.
+ * You can then use the {@link #nextEvent} method to retrieve events as they arrive.
+ *
  * Created by chenlichao on 14-7-23.
  */
 public class SWbemEventSource extends AbstractScriptingObject {
     SWbemEventSource(IJIDispatch dispatch) {
         super(dispatch);
+    }
+
+    /**
+     * If an event is available, the nextEvent method retrieves the event from an event query.
+     * @param timeoutMs <strong>[Optional]</strong> Number of milliseconds the call waits for an event before returning a time-out error.
+     *                  The default value for this parameter is -1, which directs the call to wait indefinitely.
+     * @return If successful, it returns an {@link org.wmi4j.SWbemObject} object that contains the requested event.
+     * If the call times out, the returned object is NULL and an error is raised.
+     * @throws WMIException
+     */
+    public SWbemObject nextEvent(Long timeoutMs) throws WMIException {
+        return callMethod(SWbemObject.class, "NextEvent",
+                (timeoutMs == null) ? JIVariant.OPTIONAL_PARAM() : new JIVariant(timeoutMs));
     }
 }
