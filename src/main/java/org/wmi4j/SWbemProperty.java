@@ -114,14 +114,10 @@ public class SWbemProperty extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setValue(WMIVariant variant) throws WMIException {
-        try {
-            if(variant == null) {
-                dispatch.put("Value", JIVariant.NULL());
-            }
-            dispatch.put("Value", variant.getVariant());
-        } catch (JIException e) {
-            throw new WMIException(e);
+        if(variant == null) {
+            putProperty("Value", JIVariant.NULL());
         }
+        putProperty("Value", variant.getVariant());
     }
 
     /**

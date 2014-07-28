@@ -18,7 +18,11 @@
 package org.wmi4j;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jinterop.dcom.common.JIException;
+import org.jinterop.dcom.core.IJIComObject;
 import org.jinterop.dcom.core.JIString;
+import org.jinterop.dcom.core.JIVariant;
+import org.jinterop.dcom.impls.JIObjectFactory;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
@@ -75,5 +79,26 @@ public class SWbemObjectSet extends AbstractWbemSet {
             throw new IllegalArgumentException("Index starts with zero.");
         }
         return callMethod(SWbemObject.class, "ItemIndex", index);
+    }
+
+    /**
+     * The security property is used to read, or set the security settings.
+     * This property is an {@link SWbemSecurity} object. The security settings in this object do not indicate the authentication,
+     * impersonation, or privilege settings made on a connection to Windows Management Instrumentation (WMI),
+     * or the security in effect for the proxy when an object is delivered to a sink in an asynchronous call.
+     * <p><strong>Note: </strong> Setting the Security_ property of an SWbemObject object to NULL grants unlimited access to everyone all the time.
+     * For more information, see {@link org.wmi4j.SWbemSecurity}.</p>
+     * @return The security settings of this WMI object.
+     * @throws WMIException
+     */
+    public SWbemSecurity getSecurity() throws WMIException {
+        try {
+            JIVariant result = dispatch.get("Security_");
+            IJIComObject comObject = result.getObjectAsComObject();
+            IJIDispatch securityDispatch = (IJIDispatch) JIObjectFactory.narrowObject(comObject);
+            return new SWbemSecurity(securityDispatch);
+        } catch (JIException e) {
+            throw new WMIException(e);
+        }
     }
 }

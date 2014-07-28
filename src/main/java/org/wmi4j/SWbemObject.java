@@ -55,7 +55,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * Created by chenlichao on 14-7-22.
  */
 //TODO Implement async methods
-public class SWbemObject extends AbstractScriptingObject {
+public class SWbemObject extends AbstractSecurityScriptingObject {
     SWbemObject(IJIDispatch dispatch) {
         super(dispatch);
     }

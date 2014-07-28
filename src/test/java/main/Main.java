@@ -17,13 +17,24 @@
 
 package main;
 
+import org.wmi4j.*;
+
+import java.net.UnknownHostException;
+
 /**
  * Created by chenlichao on 14-7-26.
  */
 public class Main {
 
-    public static void main(String[] args) {
-        System.out.println(SupperClass.class.isAssignableFrom(Boolean.class));
+    public static void main(String[] args) throws UnknownHostException, WMIException {
+        SWbemLocator locator = new SWbemLocator("192.168.1.201", "administrator", "password", "root\\cimv2");
+        SWbemServices services = locator.connectServer();
+        try {
+            services.get("NoThatClass");
+        } catch (WMIException e) {
+            e.printStackTrace();
+        }
+        SWbemLastError lastErr = locator.createObject(SWbemLastError.class);
     }
 
     private static class SupperClass {

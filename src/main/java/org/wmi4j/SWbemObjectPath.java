@@ -26,7 +26,7 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
  * <p/>
  * Created by chenlichao on 14-7-26.
  */
-public class SWbemObjectPath extends AbstractScriptingObject {
+public class SWbemObjectPath extends AbstractSecurityScriptingObject {
     SWbemObjectPath(IJIDispatch dispatch) {
         super(dispatch);
     }
@@ -63,11 +63,7 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setAuthority(String authority) throws WMIException {
-        try {
-            dispatch.put("Authority", new JIVariant(authority));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("Authority", new JIVariant(authority));
     }
 
     /**
@@ -85,11 +81,7 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setClass(String className) throws WMIException {
-        try {
-            dispatch.put("Class", new JIVariant(className));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("Class", new JIVariant(className));
     }
 
     /**
@@ -107,11 +99,7 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setDisplayName(String displayName) throws WMIException {
-        try {
-            dispatch.put("DisplayName", new JIVariant(displayName));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("DisplayName", new JIVariant(displayName));
     }
 
     /**
@@ -173,11 +161,7 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setLocale(String locale) throws WMIException {
-        try {
-            dispatch.put("Locale", new JIVariant(locale));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("Locale", new JIVariant(locale));
     }
 
     /**
@@ -199,11 +183,7 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setNamespace(String namespace) throws WMIException {
-        try {
-            dispatch.put("Namespace", new JIVariant(namespace));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("Namespace", new JIVariant(namespace));
     }
 
     /**
@@ -230,11 +210,7 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setPath(String path) throws WMIException {
-        try {
-            dispatch.put("Path", new JIVariant(path));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("Path", new JIVariant(path));
     }
 
     /**
@@ -252,11 +228,7 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setRelPath(String relPath) throws WMIException {
-        try {
-            dispatch.put("RelPath", new JIVariant(relPath));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("RelPath", new JIVariant(relPath));
     }
 
     /**
@@ -274,10 +246,6 @@ public class SWbemObjectPath extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setServer(String server) throws WMIException {
-        try {
-            dispatch.put("Server", new JIVariant(server));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("Server", new JIVariant(server));
     }
 }

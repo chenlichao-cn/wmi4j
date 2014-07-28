@@ -121,6 +121,6 @@ public class SWbemQualifierSet extends AbstractWbemSet<SWbemQualifier> {
      * Use default parameters for {@link #remove(String, Integer)}
      */
     public void remove(String name) throws WMIException {
-        item(name, null);
+        remove(name, null);
     }
 }

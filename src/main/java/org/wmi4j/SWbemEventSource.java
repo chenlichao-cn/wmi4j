@@ -29,7 +29,7 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
  *
  * Created by chenlichao on 14-7-23.
  */
-public class SWbemEventSource extends AbstractScriptingObject {
+public class SWbemEventSource extends AbstractSecurityScriptingObject {
     SWbemEventSource(IJIDispatch dispatch) {
         super(dispatch);
     }

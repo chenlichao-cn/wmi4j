@@ -56,27 +56,6 @@ abstract class AbstractScriptingObject {
         });
     }
 
-    /**
-     * The security property is used to read, or set the security settings.
-     * This property is an {@link SWbemSecurity} object. The security settings in this object do not indicate the authentication,
-     * impersonation, or privilege settings made on a connection to Windows Management Instrumentation (WMI),
-     * or the security in effect for the proxy when an object is delivered to a sink in an asynchronous call.
-     * <p><strong>Note: </strong> Setting the Security_ property of an SWbemObject object to NULL grants unlimited access to everyone all the time.
-     * For more information, see {@link org.wmi4j.SWbemSecurity}.</p>
-     * @return The security settings of this WMI object.
-     * @throws WMIException
-     */
-    public SWbemSecurity getSecurity() throws WMIException {
-        try {
-            JIVariant result = dispatch.get("Security_");
-            IJIComObject comObject = result.getObjectAsComObject();
-            IJIDispatch securityDispatch = (IJIDispatch)JIObjectFactory.narrowObject(comObject);
-            return new SWbemSecurity(securityDispatch);
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
-    }
-
     IJIDispatch getDispatch() {
         return dispatch;
     }
@@ -144,6 +123,14 @@ abstract class AbstractScriptingObject {
             throw new WMIException(e);
         } catch (Exception e) {
             throw new WMIException(0x01000001, "Unsupported cim type");
+        }
+    }
+
+    void putProperty(String propName, JIVariant value) throws WMIException {
+        try {
+            dispatch.put(propName, value);
+        } catch (JIException e) {
+            throw new WMIException(e);
         }
     }
 

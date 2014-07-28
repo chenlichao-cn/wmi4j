@@ -65,11 +65,7 @@ public class SWbemQualifier extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setOverridable(boolean isOverridable) throws WMIException {
-        try {
-            dispatch.put("IsOverridable", new JIVariant(isOverridable));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("IsOverridable", new JIVariant(isOverridable));
     }
 
     /**
@@ -96,11 +92,7 @@ public class SWbemQualifier extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setPropagatesToInstance(boolean propagatesToInstance) throws WMIException {
-        try {
-            dispatch.put("PropagatesToInstance", new JIVariant(propagatesToInstance));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("PropagatesToInstance", new JIVariant(propagatesToInstance));
     }
 
     /**
@@ -118,11 +110,7 @@ public class SWbemQualifier extends AbstractScriptingObject {
      * @throws WMIException
      */
     public WMIVariant getValue() throws WMIException {
-        try {
-            return new WMIVariant(dispatch.get("Value"));
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        return getProperty(WMIVariant.class, "Value");
     }
 
     /**
@@ -131,10 +119,6 @@ public class SWbemQualifier extends AbstractScriptingObject {
      * @throws WMIException
      */
     public void setValue(WMIVariant variant) throws WMIException {
-        try {
-            dispatch.put("Value", variant.getVariant());
-        } catch (JIException e) {
-            throw new WMIException(e);
-        }
+        putProperty("Value", variant.getVariant());
     }
 }

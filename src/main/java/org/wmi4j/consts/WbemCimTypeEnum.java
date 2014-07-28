@@ -61,7 +61,6 @@ public enum WbemCimTypeEnum {
     }
 
     public int getValue() {
-        WbemCimTypeEnum.valueOf("");
         return value;
     }
 

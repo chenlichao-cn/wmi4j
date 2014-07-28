@@ -34,7 +34,7 @@ import java.util.List;
  * method only.</p>
  * Created by chenlichao on 14-7-17.
  */
-public class SWbemServices extends AbstractScriptingObject {
+public class SWbemServices extends AbstractSecurityScriptingObject {
     //TODO Implement async methods
     SWbemServices(IJIDispatch dispatch) {
         super(dispatch);

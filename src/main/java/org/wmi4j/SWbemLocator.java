@@ -66,8 +66,6 @@ public class SWbemLocator {
         this.username = username;
         this.password = password;
         this.namespace = namespace;
-
-
     }
 
     /**
@@ -189,6 +187,35 @@ public class SWbemLocator {
             throw new IllegalStateException("Please connect to the server first.");
         }
         return services;
+    }
+
+    //todo complete createObject
+    public <T> T createObject(Class<T> objectType) throws WMIException {
+        String typeName = objectType.getSimpleName();
+        logger.debug("Create object {}...", typeName);
+        if(SWbemPrivilege.class.equals(objectType)) {
+            return (T)new SWbemPrivilege(co("WbemScripting." + typeName));
+        } else if(SWbemNamedValueSet.class.equals(objectType)) {
+            return (T)new SWbemNamedValueSet(co("WbemScripting." + typeName));
+        } else if(SWbemLastError.class.equals(objectType)) {
+            return (T)new SWbemLastError(co("WbemScripting." + typeName));
+        }
+        return null;
+    }
+
+    private IJIDispatch co(String progId) throws WMIException {
+        try {
+            JISession tmpSession = JISession.createSession(session);
+            JIComServer tmpSever = new JIComServer(JIProgId.valueOf(progId), server, tmpSession);
+            IJIComObject unknown = tmpSever.createInstance();
+            //IJIComObject comObject = unknown.queryInterface(JIProgId.valueOf("WbemScripting.SWbemNamedValueSet").getCorrespondingCLSID().getCLSID());
+            IJIDispatch dispatch = (IJIDispatch) JIObjectFactory.narrowObject(unknown.queryInterface(IJIDispatch.IID));
+            return dispatch;
+        } catch (JIException e) {
+            throw new WMIException(e);
+        } catch (UnknownHostException e) {
+            throw new WMIException(0,"Unknown host.");
+        }
     }
 
     /**
