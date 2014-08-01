@@ -17,8 +17,6 @@
 
 package org.wmi4j;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
 import org.apache.commons.lang3.StringUtils;
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
@@ -26,6 +24,8 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
 import org.wmi4j.consts.Flags;
 
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * <p>You can use the methods of an SWbemServices object to perform operations against a namespace
@@ -115,7 +115,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, List, SWbemNamedValueSet)}
+     * Use default parameters for method {@link #associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, java.util.List, SWbemNamedValueSet)}
      */
     public SWbemObjectSet associatorsOf(String objectPath) throws WMIException {
         return associatorsOf(objectPath, null, null, null, null, null, null, null, null, null, null);
@@ -194,6 +194,13 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      */
     public SWbemObject execMethod(String objectPath, String methodName, SWbemObject inParameters) throws WMIException {
         return execMethod(objectPath, methodName, inParameters, null, null);
+    }
+
+    /**
+     * Use default parameters for method {@link #execMethod(String, String, SWbemObject, Integer, SWbemNamedValueSet)}
+     */
+    public SWbemObject execMethod(String objectPath, String methodName) throws WMIException {
+        return execMethod(objectPath, methodName, null, null, null);
     }
 
     /**
@@ -280,7 +287,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for execQuery method {@link #execQuery(String, String, List, SWbemNamedValueSet)}
+     * Use default parameters for execQuery method {@link #execQuery(String, String, java.util.List, SWbemNamedValueSet)}
      */
     public SWbemObjectSet execQuery(String queryString) throws WMIException {
         return execQuery(queryString, null, null, null);
@@ -301,7 +308,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * @return If successful, this method returns an {@link SWbemObject} object that represents the requested object.
      * @throws WMIException
      */
-    public SWbemObject get(String objectPath, List<Flags.GetFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException{
+    public SWbemObject get(String objectPath, List<Flags.GetFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.GetFlag flag : flags) {
@@ -319,7 +326,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for get method {@link #get(String, List, SWbemNamedValueSet)}
+     * Use default parameters for get method {@link #get(String, java.util.List, SWbemNamedValueSet)}
      */
     public SWbemObject get(String objectPath) throws WMIException {
         return get(objectPath, null, null);
@@ -362,7 +369,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #instancesOf(String, List, SWbemNamedValueSet)}
+     * Use default parameters for method {@link #instancesOf(String, java.util.List, SWbemNamedValueSet)}
      */
     public SWbemObjectSet instancesOf(String className) throws WMIException {
         return instancesOf(className, null, null);
@@ -428,7 +435,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #referencesTo(String, String, String, Boolean, Boolean, String, List, SWbemNamedValueSet)}
+     * Use default parameters for method {@link #referencesTo(String, String, String, Boolean, Boolean, String, java.util.List, SWbemNamedValueSet)}
      */
     public SWbemObjectSet referencesTo(String objectPath) throws WMIException {
         return referencesTo(objectPath, null, null, null, null, null, null, null);

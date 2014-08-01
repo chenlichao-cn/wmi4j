@@ -17,6 +17,7 @@
 
 package org.wmi4j;
 
+import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
@@ -52,7 +53,7 @@ public class SWbemMethodSet extends AbstractWbemSet<SWbemMethod> {
         if(flags != null && flags != 0) {
             throw new IllegalArgumentException("Flags must be zero.");
         }
-        return callMethod(SWbemMethod.class, "Item", JIVariant.OPTIONAL_PARAM());
+        return callMethod(SWbemMethod.class, "Item", new JIString(methodName), JIVariant.OPTIONAL_PARAM());
     }
 
     /**

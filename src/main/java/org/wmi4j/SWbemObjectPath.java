@@ -17,7 +17,6 @@
 
 package org.wmi4j;
 
-import org.jinterop.dcom.common.JIException;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 

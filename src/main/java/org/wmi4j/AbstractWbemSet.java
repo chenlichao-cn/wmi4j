@@ -33,7 +33,7 @@ import java.util.Iterator;
  * Abstract object collection.
  * Created by chenlichao on 14-7-23.
  */
-abstract class AbstractWbemSet<E> extends AbstractScriptingObject {
+abstract class AbstractWbemSet<E extends AbstractScriptingObject> extends AbstractScriptingObject {
 
     AbstractWbemSet(IJIDispatch dispatch) {
         super(dispatch);
@@ -94,7 +94,7 @@ abstract class AbstractWbemSet<E> extends AbstractScriptingObject {
                         JIArray array = (JIArray)objs[0];
                         Object[] arrayObj = (Object[])array.getArrayInstance();
                         JIVariant ele = (JIVariant)arrayObj[0];
-                        IJIDispatch dispatch = (IJIDispatch)JIObjectFactory.narrowObject(ele.getObjectAsComObject());
+                        IJIDispatch dispatch = (IJIDispatch) JIObjectFactory.narrowObject(ele.getObjectAsComObject());
                         @SuppressWarnings("unchecked")
                         E result = (E)elementClass.getDeclaredConstructor(IJIDispatch.class).newInstance(dispatch);
                         index++;

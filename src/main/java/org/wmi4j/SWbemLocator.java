@@ -105,7 +105,7 @@ public class SWbemLocator {
      * @return If successful, WMI returns an {@link org.wmi4j.SWbemServices} object that is bound to the namespace
      *              that is specified in namespace parameter on the computer that is specified in server parameter.
      * @throws WMIException Failed to connect to the server.
-     * @throws UnknownHostException
+     * @throws java.net.UnknownHostException
      */
     public SWbemServices connectServer(String locale, String authority, Flags.SecurityFlag securityFlag,
                                        SWbemNamedValueSet objwbemNamedValueSet) throws WMIException, UnknownHostException {
@@ -119,7 +119,7 @@ public class SWbemLocator {
             try {
                 JISystem.setAutoRegisteration(true);
                 JISystem.setInBuiltLogHandler(false);
-                JISystem.getLogger().setLevel(Level.FINEST);
+                JISystem.getLogger().setLevel(Level.OFF);
             } catch (Exception e) {
                 logger.warn("Exception occurred when disable integrated log.");
             }
@@ -135,7 +135,7 @@ public class SWbemLocator {
             }
             session = JISession.createSession(userDomain, user, password);
             session.useSessionSecurity(true);
-            session.setGlobalSocketTimeout(5000);
+            session.setGlobalSocketTimeout(300000);
 
             //Obtain WbemScripting.SWbemLocator object
             JIComServer comStub = new JIComServer(JIProgId.valueOf("WbemScripting.SWbemLocator"), server, session);
@@ -153,7 +153,7 @@ public class SWbemLocator {
                     (securityFlag == null) ? 0 : securityFlag.getValue(),
                     (objwbemNamedValueSet == null) ? JIVariant.OPTIONAL_PARAM() : objwbemNamedValueSet.getDispatch()
             });
-            servicesDispatch = (IJIDispatch)JIObjectFactory.narrowObject(results[0].getObjectAsComObject());
+            servicesDispatch = (IJIDispatch) JIObjectFactory.narrowObject(results[0].getObjectAsComObject());
 
             //增加引用数，防止引用数为０时被垃圾回收清理资源，导致连接中断
             servicesDispatch.addRef();
@@ -169,7 +169,7 @@ public class SWbemLocator {
      * Use default parameters for {@link #connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet)}
      * @return
      * @throws WMIException
-     * @throws UnknownHostException
+     * @throws java.net.UnknownHostException
      */
     public SWbemServices connectServer() throws WMIException, UnknownHostException {
         return connectServer(null, null, null, null);

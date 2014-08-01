@@ -50,7 +50,7 @@ public class SWbemPrivilege extends AbstractScriptingObject {
      * @return {@link org.wmi4j.consts.WbemPrivilegeEnum} identifier of privilege
      * @throws WMIException
      */
-    public WbemPrivilegeEnum getIdentifier() throws WMIException  {
+    public WbemPrivilegeEnum getIdentifier() throws WMIException {
         int value = (Integer)getProperty(Integer.class, "Identifier");
         return WbemPrivilegeEnum.parse(value);
     }

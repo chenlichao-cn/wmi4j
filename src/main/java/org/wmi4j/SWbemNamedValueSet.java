@@ -23,7 +23,7 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
  * TODO Implement
  * Created by chenlichao on 14-7-17.
  */
-public class SWbemNamedValueSet extends AbstractScriptingObject {
+public class SWbemNamedValueSet extends AbstractWbemSet<SWbemNamedValue> {
 
     SWbemNamedValueSet(IJIDispatch dispatch) {
         super(dispatch);

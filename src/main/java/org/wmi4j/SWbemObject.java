@@ -139,7 +139,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      * Returns a new object that is a clone of the current object.
      * @return A new object that is a clone of the current object.
      */
-    public SWbemObject wmiClone() throws WMIException{
+    public SWbemObject wmiClone() throws WMIException {
         return callMethod(SWbemObject.class, "Clone_");
     }
 
@@ -239,6 +239,13 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      */
     public SWbemObject execMethod(String methodName, SWbemObject inParameters) throws WMIException {
         return execMethod(methodName, inParameters, null, null);
+    }
+
+    /**
+     * Use default parameters for {@link #execMethod(String, SWbemObject, Integer, SWbemNamedValueSet)}
+     */
+    public SWbemObject execMethod(String methodName) throws WMIException {
+        return execMethod(methodName, null);
     }
 
     /**
@@ -448,7 +455,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      * Use default parameters for {@link #spawnInstance(Integer)}
      */
     public SWbemObject spawnInstance() throws WMIException {
-        return spawnDerivedClass(null);
+        return spawnInstance(null);
     }
 
     /**
@@ -529,8 +536,8 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      * @return An {@link org.wmi4j.SWbemObject} object whose properties define the input parameters for the specified method.
      * @throws WMIException
      */
-    public SWbemObject getMethodInParameters(String methodName) throws WMIException {
-        return getMethods().item(methodName).getInParameters();
+    public SWbemObject getInParametersByMethodName(String methodName) throws WMIException {
+        return getMethods().item(methodName).getInParameters().spawnInstance();
     }
 
     /**
@@ -576,6 +583,16 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      */
     public WMIVariant getPropertyByName(String propertyName) throws WMIException {
         return getProperties().item(propertyName).getValue();
+    }
+
+    /**
+     * Set the variant value of the specified WMI property
+     * @param propertyName Name of the property.
+     * @param value The variant value of the property
+     * @throws WMIException
+     */
+    public void setPropertyByName(String propertyName, WMIVariant value) throws WMIException {
+        getProperties().item(propertyName).setValue(value);
     }
 
     /**

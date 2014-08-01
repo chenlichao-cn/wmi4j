@@ -114,7 +114,7 @@ abstract class AbstractScriptingObject {
                 return (T)Integer.valueOf(result.getObjectAsInt());
             } else if(AbstractScriptingObject.class.isAssignableFrom(returnType)) {
                 IJIComObject resultObject = result.getObjectAsComObject();
-                IJIDispatch resultDispatch = (IJIDispatch)JIObjectFactory.narrowObject(resultObject.queryInterface(IJIDispatch.IID));
+                IJIDispatch resultDispatch = (IJIDispatch) JIObjectFactory.narrowObject(resultObject.queryInterface(IJIDispatch.IID));
                 return (T) returnType.getDeclaredConstructor(IJIDispatch.class).newInstance(resultDispatch);
             } else {
                 return (T)new WMIVariant(result);

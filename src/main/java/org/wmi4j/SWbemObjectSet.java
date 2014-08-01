@@ -47,7 +47,7 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
  *
  * Created by chenlichao on 14-7-22.
  */
-public class SWbemObjectSet extends AbstractWbemSet {
+public class SWbemObjectSet extends AbstractWbemSet<SWbemObject> {
     SWbemObjectSet(IJIDispatch dispatch) {
         super(dispatch);
     }

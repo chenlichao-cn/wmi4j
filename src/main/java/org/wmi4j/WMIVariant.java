@@ -19,6 +19,8 @@ package org.wmi4j;
 
 import org.jinterop.dcom.common.JIException;
 import org.jinterop.dcom.core.JIVariant;
+import org.jinterop.dcom.impls.JIObjectFactory;
+import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 import java.util.Date;
 
@@ -146,6 +148,15 @@ public class WMIVariant {
     public Date getDateValue() throws WMIException {
         try {
             return variant.getObjectAsDate();
+        } catch (JIException e) {
+            throw new WMIException(e);
+        }
+    }
+
+    public SWbemObject getSWbemObjectValue() throws WMIException {
+        try {
+            IJIDispatch dispatch = (IJIDispatch) JIObjectFactory.narrowObject(variant.getObjectAsComObject());
+            return new SWbemObject(dispatch);
         } catch (JIException e) {
             throw new WMIException(e);
         }
