@@ -1,5 +1,7 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
+ * Copyright 2014-2014 Chen Lichao
+ *
+ * Licensed to the Apache  Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
@@ -17,16 +19,13 @@
 
 package service;
 
-import org.wmi4j.*;
-import org.wmi4j.consts.Flags;
+import org.wmi4j.SWbemLocator;
+import org.wmi4j.SWbemObject;
+import org.wmi4j.SWbemServices;
+import org.wmi4j.WMIException;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by chenlichao on 14-7-22.
- */
 public class ServiceManager {
 
     public static void main(String[] args) {
@@ -37,11 +36,16 @@ public class ServiceManager {
         SWbemLocator locator = new SWbemLocator(server,username,password,namespace);
 
         try {
-            SWbemServices services = locator.connectServer(null,null,null,null);
-            List<Flags.GetFlag> flags = new ArrayList<Flags.GetFlag>();
-            flags.add(Flags.GetFlag.wbemFlagUseAmendedQualifiers);
-            SWbemObject object = services.get("Win32_Service.Name='AppMgmt'", null, null);
+            SWbemServices services = locator.connectServer();
+            SWbemObject object = services.get("Win32_Service.Name='AppMgmt'");
+            //print AppMgmt properties
+            System.out.println(object.getObjectText());
 
+            //print AppMgmt service state
+            System.out.println(object.getPropertyByName("State").getStringValue());
+
+            //Stop AppMgmt service
+            object.execMethod("Stop");
         } catch (WMIException e) {
             e.printStackTrace();
         } catch (UnknownHostException e) {

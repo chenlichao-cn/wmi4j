@@ -1,5 +1,7 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
+ * Copyright 2014-2014 Chen Lichao
+ *
+ * Licensed to the Apache  Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
@@ -54,7 +56,7 @@ public class Flags {
 
     /**
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#get(String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemServices.get()} method.
+     * {@linkplain org.wmi4j.SWbemServices#get(String, org.wmi4j.SWbemNamedValueSet, Flags.GetFlag...) SWbemServices.get()} method.
      */
     public static enum GetFlag{
         /**
@@ -74,8 +76,8 @@ public class Flags {
 
     /**
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#instancesOf(String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemServices.instancesOf()}
-     * and {@link org.wmi4j.SWbemObject#instances(java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemObject.instances()}
+     * {@linkplain org.wmi4j.SWbemServices#instancesOf(String, org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemServices.instancesOf()}
+     * and {@link org.wmi4j.SWbemObject#instances(org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemObject.instances()}
      */
     public static enum InstancesFlag {
         /**
@@ -127,7 +129,7 @@ public class Flags {
 
     /**
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#execQuery(String, String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemServices.execQuery()}
+     * {@linkplain org.wmi4j.SWbemServices#execQuery(String, String, org.wmi4j.SWbemNamedValueSet, ExecQueryFlag...) SWbemServices.execQuery()}
      */
     public static enum ExecQueryFlag {
         /**
@@ -175,8 +177,8 @@ public class Flags {
     /**
      *
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemServices.associatorsOf()}
-     *  and {@link org.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemObject.associators()}.
+     * {@linkplain org.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemServices.associatorsOf()}
+     *  and {@link org.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemObject.associators()}.
      *
      */
     public static enum AssociatorsFlag {
@@ -218,8 +220,8 @@ public class Flags {
 
     /**
      * Optional values for parameter flags of
-     * {@link org.wmi4j.SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemServices.referencesOf()}
-     * and {@link org.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemObject.references()}
+     * {@link org.wmi4j.SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, org.wmi4j.SWbemNamedValueSet, ReferenceFlag...) SWbemServices.referencesOf()}
+     * and {@link org.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, org.wmi4j.SWbemNamedValueSet, ReferenceFlag...) SWbemObject.references()}
      */
     public static enum ReferenceFlag {
         /**
@@ -261,8 +263,8 @@ public class Flags {
     /**
      *
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#subclassesOf(String, java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemServices.subclassesOf()}
-     * and {@link org.wmi4j.SWbemObject#subclasses(java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemObject.subclasses()}
+     * {@linkplain org.wmi4j.SWbemServices#subclassesOf(String, org.wmi4j.SWbemNamedValueSet, SubclassesFlag...) SWbemServices.subclassesOf()}
+     * and {@link org.wmi4j.SWbemObject#subclasses(org.wmi4j.SWbemNamedValueSet, SubclassesFlag...) SWbemObject.subclasses()}
      */
     public static enum SubclassesFlag {
         /**
@@ -302,7 +304,7 @@ public class Flags {
     /**
      *
      * Optional values of flags parameter for
-     * {@link org.wmi4j.SWbemObject#compareTo(org.wmi4j.SWbemObject, java.util.List) SWbemObject.compareTo()}
+     * {@link org.wmi4j.SWbemObject#compareTo(org.wmi4j.SWbemObject, CompareToFlag...) SWbemObject.compareTo()}
      *
      */
     public static enum CompareToFlag {
@@ -356,7 +358,7 @@ public class Flags {
     }
 
     /**
-     * Optional values of flags parameter of {@link org.wmi4j.SWbemObject#put(java.util.List, org.wmi4j.SWbemNamedValueSet) SWbemObject.put()}
+     * Optional values of flags parameter of {@link org.wmi4j.SWbemObject#put(org.wmi4j.SWbemNamedValueSet, PutFlag...) SWbemObject.put()}
      */
     public static enum PutFlag {
         /**

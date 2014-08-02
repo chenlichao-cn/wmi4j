@@ -1,5 +1,7 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
+ * Copyright 2014-2014 Chen Lichao
+ *
+ * Licensed to the Apache  Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
@@ -31,15 +33,15 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
  * You can get an SWbemObjectSet object by calling any of the following methods or their asynchronous equivalents:
  *
  * <ul>
- *     <li>{@link org.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, java.util.List, SWbemNamedValueSet) SWbemObject.associators}</li>
- *     <li>{@link org.wmi4j.SWbemObject#instances(java.util.List, SWbemNamedValueSet) SWbemObject.instances}</li>
- *     <li>{@link org.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, java.util.List, SWbemNamedValueSet) SWbemObject.references}</li>
- *     <li>{@link org.wmi4j.SWbemObject#subclasses(java.util.List, SWbemNamedValueSet) SWbemObject.subclasses}</li>
- *     <li>{@link org.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, java.util.List, SWbemNamedValueSet) SWbemService.associatorsOf}</li>
- *     <li>{@linkplain org.wmi4j.SWbemServices#execQuery(String, String, java.util.List, SWbemNamedValueSet) SWbemServices.execQuery}</li>
- *     <li>{@linkplain org.wmi4j.SWbemServices#instancesOf(String, java.util.List, SWbemNamedValueSet) SWbemServices.instancesOf}</li>
- *     <li>{@link org.wmi4j.SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, java.util.List, SWbemNamedValueSet) SWbemServices.referencesTo}</li>
- *     <li>{@link org.wmi4j.SWbemServices#subclassesOf(String, java.util.List, SWbemNamedValueSet) SWbemServices.subclassesOf}</li>
+ *     <li>{@link org.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemObject.associators}</li>
+ *     <li>{@link org.wmi4j.SWbemObject#instances(SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemObject.instances}</li>
+ *     <li>{@link org.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ReferenceFlag...) SWbemObject.references}</li>
+ *     <li>{@link org.wmi4j.SWbemObject#subclasses(SWbemNamedValueSet, org.wmi4j.consts.Flags.SubclassesFlag...) SWbemObject.subclasses}</li>
+ *     <li>{@link org.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemService.associatorsOf}</li>
+ *     <li>{@linkplain org.wmi4j.SWbemServices#execQuery(String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ExecQueryFlag...) SWbemServices.execQuery}</li>
+ *     <li>{@linkplain org.wmi4j.SWbemServices#instancesOf(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemServices.instancesOf}</li>
+ *     <li>{@link org.wmi4j.SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ReferenceFlag...) SWbemServices.referencesTo}</li>
+ *     <li>{@link org.wmi4j.SWbemServices#subclassesOf(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.SubclassesFlag...) SWbemServices.subclassesOf}</li>
  * </ul>
  *
  * <p><strong>Note:</strong>  The SWbemObjectSet object does not support the optional Add and Remove collection methods.</p>

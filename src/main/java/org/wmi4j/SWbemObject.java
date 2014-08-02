@@ -1,5 +1,7 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
+ * Copyright 2014-2014 Chen Lichao
+ *
+ * Licensed to the Apache  Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
@@ -41,12 +43,12 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  *
  * <p>From the WMI client perspective, this object is always in-process.
  * Write operations only affect the local copy of the object, and read operations always retrieve values from the local copy.
- * Updates to WMI are performed only when entire objects are written using a call to the {@link #put(java.util.List, SWbemNamedValueSet) SWbemObject.put()}.
+ * Updates to WMI are performed only when entire objects are written using a call to the {@link #put(SWbemNamedValueSet, Flags.PutFlag...) SWbemObject.put()}.
  * If you modify the properties or methods in an {@link org.wmi4j.SWbemObject} object, your changes are not written to WMI
- * until you call {@link #put(java.util.List, SWbemNamedValueSet) SWbemObject.put()}.</p>
+ * until you call {@link #put(SWbemNamedValueSet, Flags.PutFlag...) SWbemObject.put()}.</p>
  *
  * <p><strong>Note: </strong> {@link org.wmi4j.SWbemObject} cannot be created by yourself.
- * If you want to create a new, empty class use {@link org.wmi4j.SWbemServices#get(String, java.util.List, SWbemNamedValueSet) SWbemServices.get}
+ * If you want to create a new, empty class use {@link org.wmi4j.SWbemServices#get(String, SWbemNamedValueSet, Flags.GetFlag...) SWbemServices.get}
  * with an empty path parameter. This call returns an empty {@link org.wmi4j.SWbemObject} object that can become a class.
  * You can then supply a class name for the class property of the {@link org.wmi4j.SWbemObjectPath} object returned by the {@link SWbemObject#getPath()} call.
  * Add properties to the new class by the properties method.
@@ -104,7 +106,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      */
     public SWbemObjectSet associators(String assocClass, String resultClass,
                                       String resultRole, String role, Boolean classesOnly, Boolean schemaOnly, String requiredAssocQualifier,
-                                      String requiredQualifier, List<Flags.AssociatorsFlag> flags, SWbemNamedValueSet objwbemNamedValueSet) throws WMIException {
+                                      String requiredQualifier, SWbemNamedValueSet objwbemNamedValueSet, Flags.AssociatorsFlag...flags) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.AssociatorsFlag flag : flags) {
@@ -129,7 +131,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #associators(String, String, String, String, Boolean, Boolean, String, String, java.util.List, SWbemNamedValueSet)}.
+     * Use default parameters for method {@link #associators(String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...)}
      */
     public SWbemObjectSet associators() throws WMIException {
         return associators(null, null, null, null, null, null, null, null, null, null);
@@ -153,7 +155,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      * @return This method returns the Boolean value of TRUE if the objects match. It returns FALSE if the objects do not match.
      * @throws WMIException
      */
-    public boolean compareTo(SWbemObject wbemObject, List<Flags.CompareToFlag> flags) throws WMIException {
+    public boolean compareTo(SWbemObject wbemObject, Flags.CompareToFlag... flags) throws WMIException {
         if(wbemObject == null) {
             return false;
         }
@@ -172,7 +174,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for {@link #compareTo(SWbemObject, java.util.List)}
+     * Use default parameters for {@link #compareTo(SWbemObject, Flags.CompareToFlag...}
      */
     public boolean compareTo(SWbemObject wbemObject) throws WMIException {
         return compareTo(wbemObject, null);
@@ -277,7 +279,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
     /**
      * Creates an enumerator that returns the instances of the current class object.
      * This method implements a simple query. More complex queries may require the use of
-     * {@link org.wmi4j.SWbemServices#execQuery(String, String, java.util.List, SWbemNamedValueSet) SWbemServices.execQuery()}.
+     * {@link org.wmi4j.SWbemServices#execQuery(String, String, SWbemNamedValueSet, Flags.ExecQueryFlag...) SWbemServices.execQuery()}.
      *
      * @param flags <strong>[Optional]</strong> Integer that determines the behavior of the call.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
@@ -288,7 +290,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      * @return The instances of the current class object.
      * @throws WMIException
      */
-    public SWbemObjectSet instances(List<Flags.InstancesFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet instances(SWbemNamedValueSet objWbemNamedValueSet, Flags.InstancesFlag... flags) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.InstancesFlag flag : flags) {
@@ -305,7 +307,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for {@link #instances(java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for {@link #instances(SWbemNamedValueSet, Flags.InstancesFlag...)}
      */
     public SWbemObjectSet instances() throws WMIException {
         return instances(null, null);
@@ -325,7 +327,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      * @return {@link org.wmi4j.SWbemObjectPath} object contains the object path of the instance or class that has been successfully committed to WMI.
      * @throws WMIException
      */
-    public SWbemObjectPath put(List<Flags.PutFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectPath put(SWbemNamedValueSet objWbemNamedValueSet, Flags.PutFlag... flags) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.PutFlag flag : flags) {
@@ -342,7 +344,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for {@link #put(java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for {@link #put(SWbemNamedValueSet, org.wmi4j.consts.Flags.PutFlag...)}
      */
     public SWbemObjectPath put() throws WMIException {
         return put(null, null);
@@ -381,7 +383,8 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      */
     public SWbemObjectSet references(String resultClass, String role,
                                      Boolean classesOnly, Boolean schemaOnly, String requiredQualifier,
-                                     List<Flags.ReferenceFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+                                     SWbemNamedValueSet objWbemNamedValueSet,
+                                     Flags.ReferenceFlag... flags) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.ReferenceFlag flag : flags) {
@@ -403,7 +406,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for {@link #references(String, String, Boolean, Boolean, String, java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for {@link #references(String, String, Boolean, Boolean, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ReferenceFlag...)}
      */
     public SWbemObjectSet references() throws WMIException {
         return references(null, null, null, null, null, null, null);
@@ -433,10 +436,10 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
 
     /**
      * Create a new instance of a class.
-     * The current object must be a class definition obtained from WMI via a method such as {@link org.wmi4j.SWbemServices#get(String, java.util.List, SWbemNamedValueSet) SWbemServices.get()}
-     * or {@link org.wmi4j.SWbemServices#execQuery(String, String, java.util.List, SWbemNamedValueSet) SWbemServices.execQuery()}.
+     * The current object must be a class definition obtained from WMI via a method such as {@link org.wmi4j.SWbemServices#get(String, SWbemNamedValueSet, Flags.GetFlag...) SWbemServices.get()}
+     * or {@link org.wmi4j.SWbemServices#execQuery(String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ExecQueryFlag...) SWbemServices.execQuery()}.
      * Then, use this class definition to create new instances.
-     * Create each new instance locally within the process, and then call {@link #put(java.util.List, SWbemNamedValueSet) SWbemObject.put()}
+     * Create each new instance locally within the process, and then call {@link #put(SWbemNamedValueSet, Flags.PutFlag...) SWbemObject.put()}
      * to actually create the instance within WMI.
      * <p><strong>Note: </strong>Spawning an instance from an instance is supported, but the returned instance is empty.</p>
      *
@@ -474,7 +477,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
      * @return If successful a {@link org.wmi4j.SWbemObjectSet} contains subclasses of the current object will be returned.
      * @throws WMIException
      */
-    public SWbemObjectSet subclasses(List<Flags.SubclassesFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet subclasses(SWbemNamedValueSet objWbemNamedValueSet, Flags.SubclassesFlag... flags) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.SubclassesFlag flag : flags) {
@@ -491,7 +494,7 @@ public class SWbemObject extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for {@link #subclasses(java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for {@link #subclasses(SWbemNamedValueSet, org.wmi4j.consts.Flags.SubclassesFlag...)}
      */
     public SWbemObjectSet subclasses() throws WMIException {
         return subclasses(null, null);

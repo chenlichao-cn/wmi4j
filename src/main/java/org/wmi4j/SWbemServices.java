@@ -1,5 +1,7 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more
+ * Copyright 2014-2014 Chen Lichao
+ *
+ * Licensed to the Apache  Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
@@ -86,7 +88,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      */
     public SWbemObjectSet associatorsOf(String objectPath, String assocClass, String resultClass,
               String resultRole, String role, Boolean classesOnly, Boolean schemaOnly, String requiredAssocQualifier,
-              String requiredQualifier, List<Flags.AssociatorsFlag> flags, SWbemNamedValueSet objwbemNamedValueSet) throws WMIException {
+              String requiredQualifier, SWbemNamedValueSet objwbemNamedValueSet, Flags.AssociatorsFlag... flags) throws WMIException {
         if(StringUtils.isEmpty(objectPath)) {
             throw new IllegalArgumentException("Object path is empty.");
         }
@@ -115,7 +117,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for method {@link #associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...)}
      */
     public SWbemObjectSet associatorsOf(String objectPath) throws WMIException {
         return associatorsOf(objectPath, null, null, null, null, null, null, null, null, null, null);
@@ -263,7 +265,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * @return If no error occurs, this method returns an {@link SWbemObjectSet} object. This is an object collection that contains the result set of the query.
      * @throws WMIException
      */
-    public SWbemObjectSet execQuery(String queryString, String queryLanguage, List<Flags.ExecQueryFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet execQuery(String queryString, String queryLanguage, SWbemNamedValueSet objWbemNamedValueSet, Flags.ExecQueryFlag... flags) throws WMIException {
         if(StringUtils.isEmpty(queryString)) {
             throw new IllegalArgumentException("QueryString is empty.");
         }
@@ -287,7 +289,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for execQuery method {@link #execQuery(String, String, java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for execQuery method {@link #execQuery(String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ExecQueryFlag...)}
      */
     public SWbemObjectSet execQuery(String queryString) throws WMIException {
         return execQuery(queryString, null, null, null);
@@ -308,7 +310,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * @return If successful, this method returns an {@link SWbemObject} object that represents the requested object.
      * @throws WMIException
      */
-    public SWbemObject get(String objectPath, List<Flags.GetFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObject get(String objectPath, SWbemNamedValueSet objWbemNamedValueSet, Flags.GetFlag... flags) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.GetFlag flag : flags) {
@@ -326,7 +328,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for get method {@link #get(String, java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for get method {@link #get(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.GetFlag...)}
      */
     public SWbemObject get(String objectPath) throws WMIException {
         return get(objectPath, null, null);
@@ -336,7 +338,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * Creates an enumerator that
      * returns the instances of a specified class according to the user-specified selection criteria.
      * This method implements a simple query. More complex queries may require the use of
-     * {@linkplain #execQuery(String, String, java.util.List, SWbemNamedValueSet) SWbemService.execQuery} method.
+     * {@linkplain #execQuery(String, String, SWbemNamedValueSet, Flags.ExecQueryFlag...) SWbemService.execQuery} method.
      * @param className String that contains the name of the class for which instances are desired. This parameter cannot be blank.
      * @param flags This parameter determines how detailed the call enumerates and if this call returns immediately.
      *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.InstancesFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
@@ -348,7 +350,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * @return If successful, the method returns an {@link SWbemObjectSet}.
      * @throws WMIException
      */
-    public SWbemObjectSet instancesOf(String className, List<Flags.InstancesFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet instancesOf(String className, SWbemNamedValueSet objWbemNamedValueSet, Flags.InstancesFlag... flags) throws WMIException {
         if(StringUtils.isEmpty(className)) {
             throw new IllegalArgumentException("Class name is empty.");
         }
@@ -369,7 +371,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #instancesOf(String, java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for method {@link #instancesOf(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...)}
      */
     public SWbemObjectSet instancesOf(String className) throws WMIException {
         return instancesOf(className, null, null);
@@ -410,7 +412,8 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      */
     public SWbemObjectSet referencesTo(String objectPath, String resultClass, String role,
                                        Boolean classesOnly, Boolean schemaOnly, String requiredQualifier,
-                                       List<Flags.ReferenceFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+                                       SWbemNamedValueSet objWbemNamedValueSet,
+                                       Flags.ReferenceFlag... flags) throws WMIException {
         if(isEmpty(objectPath)) {
             throw new IllegalArgumentException("Object path is empty.");
         }
@@ -435,7 +438,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #referencesTo(String, String, String, Boolean, Boolean, String, java.util.List, SWbemNamedValueSet)}
+     * Use default parameters for method {@link #referencesTo(String, String, String, Boolean, Boolean, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ReferenceFlag...)}
      */
     public SWbemObjectSet referencesTo(String objectPath) throws WMIException {
         return referencesTo(objectPath, null, null, null, null, null, null, null);
@@ -464,7 +467,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * @return If successful a {@link org.wmi4j.SWbemObjectSet} will be returned.
      * @throws WMIException
      */
-    public SWbemObjectSet subclassesOf(String superClass, List<Flags.SubclassesFlag> flags, SWbemNamedValueSet objWbemNamedValueSet) throws WMIException {
+    public SWbemObjectSet subclassesOf(String superClass, SWbemNamedValueSet objWbemNamedValueSet, Flags.SubclassesFlag... flags) throws WMIException {
         Integer iFlags = null;
         if(flags != null) {
             for(Flags.SubclassesFlag flag : flags) {
