@@ -5,9 +5,7 @@
 INTRODUCTION:
 
 This document contains the release notes for the 1.0.0 version of
-WMI For Java(wmi4j). wmi4j is a set of reusable components that
-should be of use in any Java environment. Commons Lang 3.3.2
-at least requires Java 6.0.
+WMI For Java(wmi4j).
 
 
 
