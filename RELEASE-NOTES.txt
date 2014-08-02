@@ -6,6 +6,3 @@ INTRODUCTION:
 
 This document contains the release notes for the 1.0.0 version of
 WMI For Java(wmi4j).
-
-
-
