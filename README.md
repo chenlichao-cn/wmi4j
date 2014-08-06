@@ -12,7 +12,7 @@ Installation
 
 Maven dependency
 	
-	<dependency>
+        <dependency>
             <groupId>cn.chenlichao</groupId>
             <artifactId>wmi4j</artifactId>
             <version>0.9</version>
