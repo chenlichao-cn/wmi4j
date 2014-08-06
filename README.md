@@ -7,6 +7,18 @@ to Windows server,
 Wmi4j implemented like [Scripting API for WMI](http://msdn.microsoft.com/en-us/library/aa393258(v=vs.85).aspx) 
 documented on Microsoft MSDN. About WMI Classes document, please see [WMI Classes](http://msdn.microsoft.com/en-us/library/aa394554(v=vs.85).aspx). 
 
+Installation
+------------
+
+Maven dependency
+	
+	<dependency>
+            <groupId>cn.chenlichao</groupId>
+            <artifactId>wmi4j</artifactId>
+            <version>0.9</version>
+        </dependency>
+
+
 Quick Start
 -----------
 
