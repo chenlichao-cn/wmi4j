@@ -17,10 +17,10 @@
  * limitations under the License.
  */
 
-package org.wmi4j.consts;
+package cn.chenlichao.wmi4j.consts;
 
 /**
- * Define the security authentication levels. These constants are used with {@link org.wmi4j.SWbemSecurity} and in moniker connections to WMI.
+ * Define the security authentication levels. These constants are used with {@link cn.chenlichao.wmi4j.SWbemSecurity} and in moniker connections to WMI.
  *
  * Created by chenlichao on 14-7-28.
  */

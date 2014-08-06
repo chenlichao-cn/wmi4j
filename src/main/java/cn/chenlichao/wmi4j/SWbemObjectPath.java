@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
@@ -125,8 +125,8 @@ public class SWbemObjectPath extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Get an {@link org.wmi4j.SWbemObjectSet} object that contains the key value bindings. This property is read-only.
-     * @return an {@link org.wmi4j.SWbemObjectSet} object that contains the key value bindings.
+     * Get an {@link SWbemObjectSet} object that contains the key value bindings. This property is read-only.
+     * @return an {@link SWbemObjectSet} object that contains the key value bindings.
      * @throws WMIException
      */
     public SWbemNamedValueSet getKeys() throws WMIException {
@@ -139,7 +139,7 @@ public class SWbemObjectPath extends AbstractSecurityScriptingObject {
      * <p>When the locale property is part of a standalone SWbemObjectPath object,
      * it is read/write and can be used to set the locale component of the moniker.</p>
      *
-     * <p>When the locale property is accessed as part of a {@link org.wmi4j.SWbemObject#getPath()} property,
+     * <p>When the locale property is accessed as part of a {@link SWbemObject#getPath()} property,
      * it is read-only and reports the value of the locale used in binding to the namespace from which the object was obtained.</p>
      *
      * <p>For Microsoft locale identifiers, the format of the string is "MS_xxxx",
@@ -155,7 +155,7 @@ public class SWbemObjectPath extends AbstractSecurityScriptingObject {
 
     /**
      * Set the locale of object path.
-     * <p>When the locale property is accessed as part of a {@link org.wmi4j.SWbemObject#getPath()} property,
+     * <p>When the locale property is accessed as part of a {@link SWbemObject#getPath()} property,
      * it is read-only and reports the value of the locale used in binding to the namespace from which the object was obtained.</p>
      *
      * @param locale the locale of object path.

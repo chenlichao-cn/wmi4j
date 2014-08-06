@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
@@ -26,7 +26,7 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * A collection of {@link org.wmi4j.SWbemQualifier} objects.
+ * A collection of {@link SWbemQualifier} objects.
  * Items are added to the collection using the {@link #add(String, WMIVariant, Boolean, Boolean, Boolean, Integer) add()} method,
  * retrieved from the collection using the {@link #item(String, Integer) item()} method,
  * and removed from the collection using the {@link #remove(String, Integer) remove()} method.
@@ -40,7 +40,7 @@ public class SWbemQualifierSet extends AbstractWbemSet<SWbemQualifier> {
     }
 
     /**
-     * Add an {@link org.wmi4j.SWbemQualifier} object to the SWbemQualifierSet collection.
+     * Add an {@link SWbemQualifier} object to the SWbemQualifierSet collection.
      * If a qualifier with the same name already exists in the collection, it is replaced
      *
      * @param name Name of the new qualifier.
@@ -78,11 +78,11 @@ public class SWbemQualifierSet extends AbstractWbemSet<SWbemQualifier> {
     }
 
     /**
-     * Gets a named {@link org.wmi4j.SWbemQualifier} from the collection.
+     * Gets a named {@link SWbemQualifier} from the collection.
      *
      * @param name Name of the qualifier to retrieve.
      * @param flags <strong>[Optional]</strong> Reserved and must be zero if specified.
-     * @return If successful, the requested {@link org.wmi4j.SWbemQualifier} object is returned.
+     * @return If successful, the requested {@link SWbemQualifier} object is returned.
      * @throws WMIException
      */
     public SWbemQualifier item(String name, Integer flags) throws WMIException {

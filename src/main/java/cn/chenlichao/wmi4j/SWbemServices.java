@@ -17,22 +17,20 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
-import org.wmi4j.consts.Flags;
-
-import java.util.List;
+import cn.chenlichao.wmi4j.consts.Flags;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * <p>You can use the methods of an SWbemServices object to perform operations against a namespace
  * on either a local host or a remote host. SWbemServices object can be initialized by call
- * {@linkplain org.wmi4j.SWbemLocator#connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet) SWbemLocator.connectServer()}
+ * {@linkplain SWbemLocator#connectServer(String, String, cn.chenlichao.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet) SWbemLocator.connectServer()}
  * method only.</p>
  * Created by chenlichao on 14-7-17.
  */
@@ -76,14 +74,14 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      *                          If specified, this parameter indicates that the returned endpoints must include
      *                          the specified qualifier.
      * @param flags <strong>[Optional]</strong> Integer that specifies additional flags to the operation.
-     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.AssociatorsFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
+     *              The default value for this parameter is {@linkplain cn.chenlichao.wmi4j.consts.Flags.AssociatorsFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
      *              which calls the method in the semisynchronous mode. This parameter can accept the following values.
      * @param objwbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return If successful a {@link org.wmi4j.SWbemObjectSet} will be returned.
+     * @return If successful a {@link SWbemObjectSet} will be returned.
      * @throws WMIException
      */
     public SWbemObjectSet associatorsOf(String objectPath, String assocClass, String resultClass,
@@ -117,7 +115,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...)}
+     * Use default parameters for method {@link #associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.AssociatorsFlag...)}
      */
     public SWbemObjectSet associatorsOf(String objectPath) throws WMIException {
         return associatorsOf(objectPath, null, null, null, null, null, null, null, null, null, null);
@@ -132,7 +130,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * @param objectPath  String that contains the object path to the object that you want to delete.
      * @param flags <strong>[Optional]</strong> Reserved. This value must be zero.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
@@ -164,15 +162,15 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      *
      * @param objectPath String that contains the object path of the object for which the method is executed.
      * @param methodName Name of the method for the object.
-     * @param inParameters <strong>[Optional]</strong> An {@link org.wmi4j.SWbemObject} object that contains the input parameters for the method being executed.
+     * @param inParameters <strong>[Optional]</strong> An {@link SWbemObject} object that contains the input parameters for the method being executed.
      *                     By default, this parameter is undefined.
      * @param flags <strong>[Optional]</strong> Reserved. This value must be zero.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return If the method is successful, an {@link org.wmi4j.SWbemObject} object is returned.
+     * @return If the method is successful, an {@link SWbemObject} object is returned.
      * The returned object contains the out parameters and return value for the method that is being executed.
      * @throws WMIException
      */
@@ -217,11 +215,11 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * @param queryLanguage <strong>[Optional]</strong> String that contains the query language to be used. If specified, this value must be "WQL".
      * @param flags <strong>[Optional]</strong> This is an integer that determines the behavior of the query. If specified, this value must be 48.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return If no error occurs, this method returns an {@link org.wmi4j.SWbemEventSource} object.
+     * @return If no error occurs, this method returns an {@link SWbemEventSource} object.
      * You can call the {@link SWbemEventSource#nextEvent(Long) SWbemEventSource.nextEvent} method to retrieve events as they arrive.
      * @throws WMIException
      */
@@ -256,9 +254,9 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      *                    and the <a href="http://msdn.microsoft.com/en-us/library/aa394606(v=vs.85).aspx" target="_blank">WQL reference</a>.
      * @param queryLanguage <strong>[Optional]</strong> String that contains the query language to be used. If specified, this value must be "WQL".
      * @param flags <strong>[Optional]</strong> Integer that determines the behavior of the query and determines whether this call returns immediately.
-     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.ExecQueryFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
+     *              The default value for this parameter is {@linkplain cn.chenlichao.wmi4j.consts.Flags.ExecQueryFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
@@ -289,7 +287,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for execQuery method {@link #execQuery(String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ExecQueryFlag...)}
+     * Use default parameters for execQuery method {@link #execQuery(String, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.ExecQueryFlag...)}
      */
     public SWbemObjectSet execQuery(String queryString) throws WMIException {
         return execQuery(queryString, null, null, null);
@@ -303,7 +301,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      *                   If this value is empty, the empty object that is returned can become a new class.
      * @param flags <strong>[Optional]</strong> Integer that determines the behavior of the query.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
@@ -328,7 +326,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for get method {@link #get(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.GetFlag...)}
+     * Use default parameters for get method {@link #get(String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.GetFlag...)}
      */
     public SWbemObject get(String objectPath) throws WMIException {
         return get(objectPath, null, null);
@@ -341,9 +339,9 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      * {@linkplain #execQuery(String, String, SWbemNamedValueSet, Flags.ExecQueryFlag...) SWbemService.execQuery} method.
      * @param className String that contains the name of the class for which instances are desired. This parameter cannot be blank.
      * @param flags This parameter determines how detailed the call enumerates and if this call returns immediately.
-     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.InstancesFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
+     *              The default value for this parameter is {@linkplain cn.chenlichao.wmi4j.consts.Flags.InstancesFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
@@ -371,7 +369,7 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #instancesOf(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...)}
+     * Use default parameters for method {@link #instancesOf(String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.InstancesFlag...)}
      */
     public SWbemObjectSet instancesOf(String className) throws WMIException {
         return instancesOf(className, null, null);
@@ -400,14 +398,14 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
      *                          If specified, this parameter indicates that the returned endpoints must include
      *                          the specified qualifier.
      * @param flags <strong>[Optional]</strong> Integer that specifies additional flags to the operation.
-     *              The default value for this parameter is {@linkplain org.wmi4j.consts.Flags.ReferenceFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
+     *              The default value for this parameter is {@linkplain cn.chenlichao.wmi4j.consts.Flags.ReferenceFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately},
      *              which calls the method in the semisynchronous mode. This parameter can accept the following values.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return If successful a {@link org.wmi4j.SWbemObjectSet} will be returned.
+     * @return If successful a {@link SWbemObjectSet} will be returned.
      * @throws WMIException
      */
     public SWbemObjectSet referencesTo(String objectPath, String resultClass, String role,
@@ -438,33 +436,33 @@ public class SWbemServices extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Use default parameters for method {@link #referencesTo(String, String, String, Boolean, Boolean, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ReferenceFlag...)}
+     * Use default parameters for method {@link #referencesTo(String, String, String, Boolean, Boolean, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.ReferenceFlag...)}
      */
     public SWbemObjectSet referencesTo(String objectPath) throws WMIException {
         return referencesTo(objectPath, null, null, null, null, null, null, null);
     }
 
     /**
-     * Returns an {@link org.wmi4j.SWbemObjectSet} object. This object is a collection of subclasses of a specified class.
+     * Returns an {@link SWbemObjectSet} object. This object is a collection of subclasses of a specified class.
      * Items in the returned collection can be obtained using standard collection methods.
      * This method only works for class objects.
      * The method is called in the semisynchronous mode.
      *
      * @param superClass <strong>[Optional]</strong> Specifies a parent class name.
      *                   Only subclasses of this class return in the enumerator.
-     *                   If you leave this parameter blank, and if flags is {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagShallow wbemQueryFlagShallow},
+     *                   If you leave this parameter blank, and if flags is {@link cn.chenlichao.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagShallow wbemQueryFlagShallow},
      *                   only the top-level classes are returned (that is, classes that have no parent class).
-     *                   If this parameter is blank and flags is {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagDeep wbemQueryFlagDeep},
+     *                   If this parameter is blank and flags is {@link cn.chenlichao.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagDeep wbemQueryFlagDeep},
      *                   all classes within the namespace are returned.
      * @param flags <strong>[Optional]</strong> Determines how detailed the call enumerates.
-     *              The default values for this parameter are {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}
-     *              and {@link org.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagDeep wbemQueryFlagDeep}.
+     *              The default values for this parameter are {@link cn.chenlichao.wmi4j.consts.Flags.SubclassesFlag#wbemFlagReturnImmediately wbemFlagReturnImmediately}
+     *              and {@link cn.chenlichao.wmi4j.consts.Flags.SubclassesFlag#wbemQueryFlagDeep wbemQueryFlagDeep}.
      * @param objWbemNamedValueSet <strong>[Optional]</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements represent the context
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements represent the context
      *                             information that can be used by the provider that is servicing the request.
      *                             A provider that supports or requires such information must document the recognized
      *                             value names, data type of the value, allowed values, and semantics.
-     * @return If successful a {@link org.wmi4j.SWbemObjectSet} will be returned.
+     * @return If successful a {@link SWbemObjectSet} will be returned.
      * @throws WMIException
      */
     public SWbemObjectSet subclassesOf(String superClass, SWbemNamedValueSet objWbemNamedValueSet, Flags.SubclassesFlag... flags) throws WMIException {

@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jinterop.dcom.common.JIException;
@@ -33,15 +33,15 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
  * You can get an SWbemObjectSet object by calling any of the following methods or their asynchronous equivalents:
  *
  * <ul>
- *     <li>{@link org.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemObject.associators}</li>
- *     <li>{@link org.wmi4j.SWbemObject#instances(SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemObject.instances}</li>
- *     <li>{@link org.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ReferenceFlag...) SWbemObject.references}</li>
- *     <li>{@link org.wmi4j.SWbemObject#subclasses(SWbemNamedValueSet, org.wmi4j.consts.Flags.SubclassesFlag...) SWbemObject.subclasses}</li>
- *     <li>{@link org.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemService.associatorsOf}</li>
- *     <li>{@linkplain org.wmi4j.SWbemServices#execQuery(String, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ExecQueryFlag...) SWbemServices.execQuery}</li>
- *     <li>{@linkplain org.wmi4j.SWbemServices#instancesOf(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemServices.instancesOf}</li>
- *     <li>{@link org.wmi4j.SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, SWbemNamedValueSet, org.wmi4j.consts.Flags.ReferenceFlag...) SWbemServices.referencesTo}</li>
- *     <li>{@link org.wmi4j.SWbemServices#subclassesOf(String, SWbemNamedValueSet, org.wmi4j.consts.Flags.SubclassesFlag...) SWbemServices.subclassesOf}</li>
+ *     <li>{@link SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.AssociatorsFlag...) SWbemObject.associators}</li>
+ *     <li>{@link SWbemObject#instances(SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.InstancesFlag...) SWbemObject.instances}</li>
+ *     <li>{@link SWbemObject#references(String, String, Boolean, Boolean, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.ReferenceFlag...) SWbemObject.references}</li>
+ *     <li>{@link SWbemObject#subclasses(SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.SubclassesFlag...) SWbemObject.subclasses}</li>
+ *     <li>{@link SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.AssociatorsFlag...) SWbemService.associatorsOf}</li>
+ *     <li>{@linkplain SWbemServices#execQuery(String, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.ExecQueryFlag...) SWbemServices.execQuery}</li>
+ *     <li>{@linkplain SWbemServices#instancesOf(String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.InstancesFlag...) SWbemServices.instancesOf}</li>
+ *     <li>{@link SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.ReferenceFlag...) SWbemServices.referencesTo}</li>
+ *     <li>{@link SWbemServices#subclassesOf(String, SWbemNamedValueSet, cn.chenlichao.wmi4j.consts.Flags.SubclassesFlag...) SWbemServices.subclassesOf}</li>
  * </ul>
  *
  * <p><strong>Note:</strong>  The SWbemObjectSet object does not support the optional Add and Remove collection methods.</p>
@@ -89,7 +89,7 @@ public class SWbemObjectSet extends AbstractWbemSet<SWbemObject> {
      * impersonation, or privilege settings made on a connection to Windows Management Instrumentation (WMI),
      * or the security in effect for the proxy when an object is delivered to a sink in an asynchronous call.
      * <p><strong>Note: </strong> Setting the Security_ property of an SWbemObject object to NULL grants unlimited access to everyone all the time.
-     * For more information, see {@link org.wmi4j.SWbemSecurity}.</p>
+     * For more information, see {@link SWbemSecurity}.</p>
      * @return The security settings of this WMI object.
      * @throws WMIException
      */

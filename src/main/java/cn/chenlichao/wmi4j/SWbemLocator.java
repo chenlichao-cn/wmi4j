@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.common.JIException;
 import org.jinterop.dcom.common.JISystem;
@@ -26,7 +26,7 @@ import org.jinterop.dcom.impls.JIObjectFactory;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wmi4j.consts.Flags;
+import cn.chenlichao.wmi4j.consts.Flags;
 
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -35,7 +35,7 @@ import java.util.logging.Level;
  * <p>
  * You can use the methods of the {@link SWbemLocator} object to obtain an SWbemServices object that represents
  * a connection to a namespace on either a local computer or a remote host computer.
- * You can then use the methods of the {@link org.wmi4j.SWbemServices} object to access WMI.
+ * You can then use the methods of the {@link SWbemServices} object to access WMI.
  * </p>
  * Created by chenlichao on 14-7-17.
  */
@@ -71,7 +71,7 @@ public class SWbemLocator {
     }
 
     /**
-     * <p>The ConnectServer method of the {@link org.wmi4j.SWbemLocator} object connects to the namespace on the computer
+     * <p>The ConnectServer method of the {@link SWbemLocator} object connects to the namespace on the computer
      * that is specified in the strServer parameter. The target computer can be either local or remote,
      * but it must have WMI installed. For examples and a comparison with the moniker type of connection,
      * see Creating a WMI Script.</p>
@@ -100,11 +100,11 @@ public class SWbemLocator {
      *                  Example: "NTLMDomain:DOMAIN"</p>
      * @param securityFlag <strong>Optional.</strong> Used to pass flag values to connectServer method.
      * @param objwbemNamedValueSet <strong>Optional.</strong> Typically, this is undefined.
-     *                             Otherwise, this is an {@link org.wmi4j.SWbemNamedValueSet} object whose elements
+     *                             Otherwise, this is an {@link SWbemNamedValueSet} object whose elements
      *                             represent the context information that can be used by the provider that is servicing
      *                             the request. A provider that supports or requires such information must document
      *                             the recognized value names, data type of the value, allowed values, and semantics.
-     * @return If successful, WMI returns an {@link org.wmi4j.SWbemServices} object that is bound to the namespace
+     * @return If successful, WMI returns an {@link SWbemServices} object that is bound to the namespace
      *              that is specified in namespace parameter on the computer that is specified in server parameter.
      * @throws WMIException Failed to connect to the server.
      * @throws java.net.UnknownHostException
@@ -168,7 +168,7 @@ public class SWbemLocator {
     }
 
     /**
-     * Use default parameters for {@link #connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet)}
+     * Use default parameters for {@link #connectServer(String, String, cn.chenlichao.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet)}
      * @return
      * @throws WMIException
      * @throws java.net.UnknownHostException
@@ -178,10 +178,10 @@ public class SWbemLocator {
     }
 
     /**
-     * Obtain {@link org.wmi4j.SWbemServices} object;
-     * <p><strong>Note: </strong>Before call this method, you need call {@link #connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet) connectServer} first,
+     * Obtain {@link SWbemServices} object;
+     * <p><strong>Note: </strong>Before call this method, you need call {@link #connectServer(String, String, cn.chenlichao.wmi4j.consts.Flags.SecurityFlag, SWbemNamedValueSet) connectServer} first,
      *  to generate SWbemServices object.</p>
-     * @return {@link org.wmi4j.SWbemServices} object
+     * @return {@link SWbemServices} object
      * @exception IllegalStateException If call before connect to the server.
      */
     public SWbemServices getSWbemServices() {

@@ -19,6 +19,8 @@
 
 package org.wmi4j;
 
+import cn.chenlichao.wmi4j.SWbemLocator;
+import cn.chenlichao.wmi4j.SWbemServices;
 import config.Config;
 import org.junit.*;
 import org.junit.rules.ExpectedException;

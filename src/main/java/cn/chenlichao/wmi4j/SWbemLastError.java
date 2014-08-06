@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
@@ -31,10 +31,10 @@ public class SWbemLastError extends AbstractSecurityScriptingObject {
     }
 
     /**
-     * Returns an {@link org.wmi4j.SWbemPropertySet} object that is a collection of the properties for the current class or instance.
+     * Returns an {@link SWbemPropertySet} object that is a collection of the properties for the current class or instance.
      * This property is read-only.
      *
-     * @return An {@link org.wmi4j.SWbemPropertySet} object that is a collection of the properties for the current class or instance.
+     * @return An {@link SWbemPropertySet} object that is a collection of the properties for the current class or instance.
      * @throws WMIException
      */
     public SWbemPropertySet getProperties() throws WMIException {

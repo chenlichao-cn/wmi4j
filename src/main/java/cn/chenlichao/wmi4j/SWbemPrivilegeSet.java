@@ -17,16 +17,16 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
-import org.wmi4j.consts.WbemPrivilegeEnum;
+import cn.chenlichao.wmi4j.consts.WbemPrivilegeEnum;
 
 /**
- * An SWbemPrivilegeSet object is a collection of {@link org.wmi4j.SWbemPrivilege} objects in an
- * {@link org.wmi4j.SWbemSecurity} object that requests specific privileges for a Windows Management Instrumentation (WMI) object.
+ * An SWbemPrivilegeSet object is a collection of {@link SWbemPrivilege} objects in an
+ * {@link SWbemSecurity} object that requests specific privileges for a Windows Management Instrumentation (WMI) object.
  * See the list of privileges in Privilege Constants. Items are added to the collection using the Add and AddAsString methods. Items are retrieved from the collection using the Item method, and removed using the Remove method. This object cannot be created by the VBScript CreateObject method call. For more information, see Accessing a Collection.
 
  An SWbemPrivilegeSet object is a set of privilege override requests for a specific object. When an API call is made using this object, the privilege override requests are attempted. The SWbemPrivilegeSet object does not define the privileges available to the current user or process. In other words, obtaining the privileges for any WMI object does not identify the privilege settings that are made on the connection to WMI, or the privileges in effect when an object is delivered to a sink.
@@ -38,12 +38,12 @@ public class SWbemPrivilegeSet extends AbstractWbemSet<SWbemPrivilege> {
     }
 
     /**
-     * Adds an {@link org.wmi4j.SWbemPrivilege} object to the collection.
+     * Adds an {@link SWbemPrivilege} object to the collection.
      * If a privilege with the same name already exists in the collection, it is replaced.
      *
      * @param privilege Privilege for a WMI object.
      * @param enabled <strong>[Optional]</strong> Enables or disables this privilege. The default value is TRUE.
-     * @return If successful, returns an {@link org.wmi4j.SWbemPrivilege} object that represents the new privilege.
+     * @return If successful, returns an {@link SWbemPrivilege} object that represents the new privilege.
      * Otherwise, a null object is returned.
      * @throws WMIException
      */
@@ -55,11 +55,11 @@ public class SWbemPrivilegeSet extends AbstractWbemSet<SWbemPrivilege> {
 
     /**
      * You can use the addAsString method to add a privilege to the collection using a privilege string.
-     * Use this method to add a privilege or to enable a privilege for {@link org.wmi4j.SWbemSecurity} objects.
+     * Use this method to add a privilege or to enable a privilege for {@link SWbemSecurity} objects.
      *
      * @param privilege String privilege for a WMI object.
      * @param enabled <strong>[Optional]</strong> Enables or disables this privilege. The default value is TRUE.
-     * @return If successful, returns an {@link org.wmi4j.SWbemPrivilege} object that represents the new privilege.
+     * @return If successful, returns an {@link SWbemPrivilege} object that represents the new privilege.
      * Otherwise, a null object is returned.
      * @throws WMIException
      */
@@ -77,9 +77,9 @@ public class SWbemPrivilegeSet extends AbstractWbemSet<SWbemPrivilege> {
     }
 
     /**
-     * Get the specified {@link org.wmi4j.SWbemPrivilege} object from the collection.
+     * Get the specified {@link SWbemPrivilege} object from the collection.
      * @param privilege Privilege enum.
-     * @return the specified {@link org.wmi4j.SWbemPrivilege} object
+     * @return the specified {@link SWbemPrivilege} object
      * @throws WMIException
      */
     public SWbemPrivilege item(WbemPrivilegeEnum privilege) throws WMIException {
@@ -87,7 +87,7 @@ public class SWbemPrivilegeSet extends AbstractWbemSet<SWbemPrivilege> {
     }
 
     /**
-     * Delete the specified {@link org.wmi4j.SWbemPrivilege} object from the collection.
+     * Delete the specified {@link SWbemPrivilege} object from the collection.
      * @param privilege Privilege enum.
      * @throws WMIException
      */

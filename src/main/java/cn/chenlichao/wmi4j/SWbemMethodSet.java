@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
@@ -26,7 +26,7 @@ import org.jinterop.dcom.impls.automation.IJIDispatch;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * An SWbemMethodSet object is a collection of {@link org.wmi4j.SWbemMethod} objects.
+ * An SWbemMethodSet object is a collection of {@link SWbemMethod} objects.
  * Items are retrieved using the {@link #item(String, Integer)} method.
  *
  * <p><strong>Note:</strong>  In this version of the API, write access to method information is not supported.
@@ -42,10 +42,10 @@ public class SWbemMethodSet extends AbstractWbemSet<SWbemMethod> {
     }
 
     /**
-     * Returns a named {@link org.wmi4j.SWbemMethod} object from the collection.
+     * Returns a named {@link SWbemMethod} object from the collection.
      * @param methodName  Name of the method to retrieve.
      * @param flags <strong>[Optional]</strong> Reserved and must be zero if specified.
-     * @return A named {@link org.wmi4j.SWbemMethod} object from the collection.
+     * @return A named {@link SWbemMethod} object from the collection.
      * @throws WMIException
      */
     public SWbemMethod item(String methodName, Integer flags) throws WMIException {

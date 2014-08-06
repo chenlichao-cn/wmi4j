@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j.consts;
+package cn.chenlichao.wmi4j.consts;
 
 
 /**
@@ -27,17 +27,17 @@ package org.wmi4j.consts;
 public class Flags {
 
     /**
-     * securityFlag parameter of {@linkplain org.wmi4j.SWbemLocator#connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, org.wmi4j.SWbemNamedValueSet) SWbemLocator.connectServer()} optional values;
+     * securityFlag parameter of {@linkplain cn.chenlichao.wmi4j.SWbemLocator#connectServer(String, String, Flags.SecurityFlag, cn.chenlichao.wmi4j.SWbemNamedValueSet) SWbemLocator.connectServer()} optional values;
      */
     public enum SecurityFlag {
         /**
-         * A value of 0 for this parameter causes the call to {@linkplain org.wmi4j.SWbemLocator#connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, org.wmi4j.SWbemNamedValueSet) connectServer()}
+         * A value of 0 for this parameter causes the call to {@linkplain cn.chenlichao.wmi4j.SWbemLocator#connectServer(String, String, Flags.SecurityFlag, cn.chenlichao.wmi4j.SWbemNamedValueSet) connectServer()}
          * to return only after the connection to the server is established.
          * This could cause your program to stop responding indefinitely if the connection cannot be established.
          */
         wbemConnectFlagWhenComplete(0x0),
         /**
-         * The {@linkplain org.wmi4j.SWbemLocator#connectServer(String, String, org.wmi4j.consts.Flags.SecurityFlag, org.wmi4j.SWbemNamedValueSet) connectServer()} call is guaranteed
+         * The {@linkplain cn.chenlichao.wmi4j.SWbemLocator#connectServer(String, String, Flags.SecurityFlag, cn.chenlichao.wmi4j.SWbemNamedValueSet) connectServer()} call is guaranteed
          * to return in 2 minutes or less. Use this flag to prevent your program from ceasing to respond indefinitely
          * if the connection cannot be established.
          */
@@ -56,7 +56,7 @@ public class Flags {
 
     /**
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#get(String, org.wmi4j.SWbemNamedValueSet, Flags.GetFlag...) SWbemServices.get()} method.
+     * {@linkplain cn.chenlichao.wmi4j.SWbemServices#get(String, cn.chenlichao.wmi4j.SWbemNamedValueSet, Flags.GetFlag...) SWbemServices.get()} method.
      */
     public static enum GetFlag{
         /**
@@ -76,14 +76,14 @@ public class Flags {
 
     /**
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#instancesOf(String, org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemServices.instancesOf()}
-     * and {@link org.wmi4j.SWbemObject#instances(org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.InstancesFlag...) SWbemObject.instances()}
+     * {@linkplain cn.chenlichao.wmi4j.SWbemServices#instancesOf(String, cn.chenlichao.wmi4j.SWbemNamedValueSet, Flags.InstancesFlag...) SWbemServices.instancesOf()}
+     * and {@link cn.chenlichao.wmi4j.SWbemObject#instances(cn.chenlichao.wmi4j.SWbemNamedValueSet, Flags.InstancesFlag...) SWbemObject.instances()}
      */
     public static enum InstancesFlag {
         /**
          * 32(0x20): Causes a forward-only enumerator to be returned.
          * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link org.wmi4j.SWbemObject#wmiClone()}.
+         * but they do not allow calls to {@link cn.chenlichao.wmi4j.SWbemObject#wmiClone()}.
          */
         wbemFlagForwardOnly(0x20),
 
@@ -129,13 +129,13 @@ public class Flags {
 
     /**
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#execQuery(String, String, org.wmi4j.SWbemNamedValueSet, ExecQueryFlag...) SWbemServices.execQuery()}
+     * {@linkplain cn.chenlichao.wmi4j.SWbemServices#execQuery(String, String, cn.chenlichao.wmi4j.SWbemNamedValueSet, ExecQueryFlag...) SWbemServices.execQuery()}
      */
     public static enum ExecQueryFlag {
         /**
          * 32(0x20): Causes a forward-only enumerator to be returned.
          * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link org.wmi4j.SWbemObject#wmiClone()}.
+         * but they do not allow calls to {@link cn.chenlichao.wmi4j.SWbemObject#wmiClone()}.
          */
         wbemFlagForwardOnly(0x20),
 
@@ -177,15 +177,15 @@ public class Flags {
     /**
      *
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemServices.associatorsOf()}
-     *  and {@link org.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, org.wmi4j.SWbemNamedValueSet, org.wmi4j.consts.Flags.AssociatorsFlag...) SWbemObject.associators()}.
+     * {@linkplain cn.chenlichao.wmi4j.SWbemServices#associatorsOf(String, String, String, String, String, Boolean, Boolean, String, String, cn.chenlichao.wmi4j.SWbemNamedValueSet, Flags.AssociatorsFlag...) SWbemServices.associatorsOf()}
+     *  and {@link cn.chenlichao.wmi4j.SWbemObject#associators(String, String, String, String, Boolean, Boolean, String, String, cn.chenlichao.wmi4j.SWbemNamedValueSet, Flags.AssociatorsFlag...) SWbemObject.associators()}.
      *
      */
     public static enum AssociatorsFlag {
         /**
          * 32(0x20): Causes a forward-only enumerator to be returned.
          * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link org.wmi4j.SWbemObject#wmiClone()}.
+         * but they do not allow calls to {@link cn.chenlichao.wmi4j.SWbemObject#wmiClone()}.
          */
         wbemFlagForwardOnly(0x20),
 
@@ -220,14 +220,14 @@ public class Flags {
 
     /**
      * Optional values for parameter flags of
-     * {@link org.wmi4j.SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, org.wmi4j.SWbemNamedValueSet, ReferenceFlag...) SWbemServices.referencesOf()}
-     * and {@link org.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, org.wmi4j.SWbemNamedValueSet, ReferenceFlag...) SWbemObject.references()}
+     * {@link cn.chenlichao.wmi4j.SWbemServices#referencesTo(String, String, String, Boolean, Boolean, String, cn.chenlichao.wmi4j.SWbemNamedValueSet, ReferenceFlag...) SWbemServices.referencesOf()}
+     * and {@link cn.chenlichao.wmi4j.SWbemObject#references(String, String, Boolean, Boolean, String, cn.chenlichao.wmi4j.SWbemNamedValueSet, ReferenceFlag...) SWbemObject.references()}
      */
     public static enum ReferenceFlag {
         /**
          * 32(0x20): Causes a forward-only enumerator to be returned.
          * Forward-only enumerators are generally much faster and use less memory than conventional enumerators,
-         * but they do not allow calls to {@link org.wmi4j.SWbemObject#wmiClone()}.
+         * but they do not allow calls to {@link cn.chenlichao.wmi4j.SWbemObject#wmiClone()}.
          */
         wbemFlagForwardOnly(0x20),
 
@@ -263,8 +263,8 @@ public class Flags {
     /**
      *
      * Optional values of flags parameter for
-     * {@linkplain org.wmi4j.SWbemServices#subclassesOf(String, org.wmi4j.SWbemNamedValueSet, SubclassesFlag...) SWbemServices.subclassesOf()}
-     * and {@link org.wmi4j.SWbemObject#subclasses(org.wmi4j.SWbemNamedValueSet, SubclassesFlag...) SWbemObject.subclasses()}
+     * {@linkplain cn.chenlichao.wmi4j.SWbemServices#subclassesOf(String, cn.chenlichao.wmi4j.SWbemNamedValueSet, SubclassesFlag...) SWbemServices.subclassesOf()}
+     * and {@link cn.chenlichao.wmi4j.SWbemObject#subclasses(cn.chenlichao.wmi4j.SWbemNamedValueSet, SubclassesFlag...) SWbemObject.subclasses()}
      */
     public static enum SubclassesFlag {
         /**
@@ -304,7 +304,7 @@ public class Flags {
     /**
      *
      * Optional values of flags parameter for
-     * {@link org.wmi4j.SWbemObject#compareTo(org.wmi4j.SWbemObject, CompareToFlag...) SWbemObject.compareTo()}
+     * {@link cn.chenlichao.wmi4j.SWbemObject#compareTo(cn.chenlichao.wmi4j.SWbemObject, CompareToFlag...) SWbemObject.compareTo()}
      *
      */
     public static enum CompareToFlag {
@@ -358,7 +358,7 @@ public class Flags {
     }
 
     /**
-     * Optional values of flags parameter of {@link org.wmi4j.SWbemObject#put(org.wmi4j.SWbemNamedValueSet, PutFlag...) SWbemObject.put()}
+     * Optional values of flags parameter of {@link cn.chenlichao.wmi4j.SWbemObject#put(cn.chenlichao.wmi4j.SWbemNamedValueSet, PutFlag...) SWbemObject.put()}
      */
     public static enum PutFlag {
         /**

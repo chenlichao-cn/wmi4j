@@ -17,12 +17,12 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.common.JIException;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
-import org.wmi4j.consts.WbemCimTypeEnum;
+import cn.chenlichao.wmi4j.consts.WbemCimTypeEnum;
 
 /**
  * Represents a single WMI property of a managed object.
@@ -87,9 +87,9 @@ public class SWbemProperty extends AbstractScriptingObject {
     }
 
     /**
-     * Returns an {@link org.wmi4j.SWbemQualifierSet} object that is a collection of qualifiers for this WMI property.
+     * Returns an {@link SWbemQualifierSet} object that is a collection of qualifiers for this WMI property.
      * This property is read-only.
-     * @return An {@link org.wmi4j.SWbemQualifierSet} object that is a collection of qualifiers for this WMI property.
+     * @return An {@link SWbemQualifierSet} object that is a collection of qualifiers for this WMI property.
      * @throws WMIException
      */
     public SWbemQualifierSet getQualifiers() throws WMIException {

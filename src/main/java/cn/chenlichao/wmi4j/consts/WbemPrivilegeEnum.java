@@ -17,11 +17,11 @@
  * limitations under the License.
  */
 
-package org.wmi4j.consts;
+package cn.chenlichao.wmi4j.consts;
 
 /**
  * The WbemPrivilegeEnum constants define privileges.
- * These constants are used with {@link org.wmi4j.SWbemSecurity} to grant the privileges required for some operations.
+ * These constants are used with {@link cn.chenlichao.wmi4j.SWbemSecurity} to grant the privileges required for some operations.
  *
  * Created by chenlichao on 14-7-28.
  */

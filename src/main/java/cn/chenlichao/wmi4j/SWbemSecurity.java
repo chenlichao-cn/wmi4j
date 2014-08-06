@@ -17,18 +17,18 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
-import org.wmi4j.consts.WbemAuthenticationLevelEnum;
-import org.wmi4j.consts.WbemImpersonationLevelEnum;
+import cn.chenlichao.wmi4j.consts.WbemAuthenticationLevelEnum;
+import cn.chenlichao.wmi4j.consts.WbemImpersonationLevelEnum;
 
 /**
  * The SWbemSecurity object gets or sets security settings, such as privileges, COM impersonations, and authentication levels
- * assigned to an object. The {@link org.wmi4j.SWbemLocator}, {@link org.wmi4j.SWbemServices}, {@link org.wmi4j.SWbemObject},
- * {@link org.wmi4j.SWbemObjectSet}, {@link org.wmi4j.SWbemObjectPath}, {@link SWbemLastError},
- * and {@link org.wmi4j.SWbemEventSource} objects have a security property, which is the SWbemSecurity object.
+ * assigned to an object. The {@link SWbemLocator}, {@link SWbemServices}, {@link SWbemObject},
+ * {@link SWbemObjectSet}, {@link SWbemObjectPath}, {@link SWbemLastError},
+ * and {@link SWbemEventSource} objects have a security property, which is the SWbemSecurity object.
  * When you retrieve an instance or view the WMI security log, you might need to set the properties of the SWbemSecurity object.
  *
  * Created by chenlichao on 14-7-23.
@@ -89,11 +89,11 @@ public class SWbemSecurity extends AbstractScriptingObject{
      *
      * <h3>Remark</h3>
      * <p>This setting allows you to grant or revoke privileges as part of a WMI moniker string.
-     * For the complete list of applicable values, see {@link org.wmi4j.consts.WbemPrivilegeEnum} </p>
+     * For the complete list of applicable values, see {@link cn.chenlichao.wmi4j.consts.WbemPrivilegeEnum} </p>
      *
-     * <p>You can change the privileges defined for the {@link org.wmi4j.SWbemServices},
-     * {@link org.wmi4j.SWbemObject}, {@link org.wmi4j.SWbemObjectSet}, {@link org.wmi4j.SWbemObjectPath},
-     * and {@link org.wmi4j.SWbemLocator} objects by adding {@link org.wmi4j.SWbemPrivilege} objects to the privileges property.</p>
+     * <p>You can change the privileges defined for the {@link SWbemServices},
+     * {@link SWbemObject}, {@link SWbemObjectSet}, {@link SWbemObjectPath},
+     * and {@link SWbemLocator} objects by adding {@link SWbemPrivilege} objects to the privileges property.</p>
      *
      * <p>There are fundamental differences in how different versions of Windows handle changes to privileges.
      * If you are developing an application that is only used on Windows platforms, you can set or revoke privileges at any time.</p>

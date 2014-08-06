@@ -29,8 +29,8 @@
  */
 package service;
 
-import org.wmi4j.*;
-import org.wmi4j.consts.WbemCimTypeEnum;
+import cn.chenlichao.wmi4j.*;
+import cn.chenlichao.wmi4j.consts.WbemCimTypeEnum;
 
 import java.net.UnknownHostException;
 

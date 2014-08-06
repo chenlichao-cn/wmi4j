@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j.consts;
+package cn.chenlichao.wmi4j.consts;
 
 /**
  * The WbemCimtypeEnum constants define the valid CIM types of a property value.

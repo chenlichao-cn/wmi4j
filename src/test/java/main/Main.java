@@ -19,7 +19,10 @@
 
 package main;
 
-import org.wmi4j.*;
+import cn.chenlichao.wmi4j.SWbemLastError;
+import cn.chenlichao.wmi4j.SWbemLocator;
+import cn.chenlichao.wmi4j.SWbemServices;
+import cn.chenlichao.wmi4j.WMIException;
 
 import java.net.UnknownHostException;
 

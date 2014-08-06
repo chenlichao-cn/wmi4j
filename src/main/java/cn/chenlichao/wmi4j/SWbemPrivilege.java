@@ -17,11 +17,11 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
-import org.wmi4j.consts.WbemPrivilegeEnum;
+import cn.chenlichao.wmi4j.consts.WbemPrivilegeEnum;
 
 /**
  * The SWbemPrivilege object represents a single privilege.
@@ -46,10 +46,10 @@ public class SWbemPrivilege extends AbstractScriptingObject {
     }
 
     /**
-     * The identifier property of an SWbemPrivilege object is an {@link org.wmi4j.consts.WbemPrivilegeEnum}
+     * The identifier property of an SWbemPrivilege object is an {@link cn.chenlichao.wmi4j.consts.WbemPrivilegeEnum}
      * that represents the privilege that is being set or retrieved.
      *
-     * @return {@link org.wmi4j.consts.WbemPrivilegeEnum} identifier of privilege
+     * @return {@link cn.chenlichao.wmi4j.consts.WbemPrivilegeEnum} identifier of privilege
      * @throws WMIException
      */
     public WbemPrivilegeEnum getIdentifier() throws WMIException {

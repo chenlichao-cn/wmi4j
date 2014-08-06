@@ -17,15 +17,15 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
  * You can use the properties of the SWbemMethod object to inspect a single method definition of a WMI object.
  * <p>This object can be used to inspect the definitions of methods.
- * To invoke the methods, you should use either direct access on an {@link org.wmi4j.SWbemObject} (which is the recommended mechanism) object,
- * or the {@link org.wmi4j.SWbemServices#execMethod(String, String, SWbemObject, Integer, SWbemNamedValueSet) SWbemServices.execMethod()} call. </p>
+ * To invoke the methods, you should use either direct access on an {@link SWbemObject} (which is the recommended mechanism) object,
+ * or the {@link SWbemServices#execMethod(String, String, SWbemObject, Integer, SWbemNamedValueSet) SWbemServices.execMethod()} call. </p>
  *
  * <p><strong>Note:</strong>  In this version of the API, write access to method information is not supported.
  * If you want to define methods or modify existing method definitions,
@@ -40,10 +40,10 @@ public class SWbemMethod extends AbstractScriptingObject {
     }
 
     /**
-     * Get an {@link org.wmi4j.SWbemObject} object whose properties define the input parameters for this method.
+     * Get an {@link SWbemObject} object whose properties define the input parameters for this method.
      * This property is read-only. Note that any changes that are made to this object are not reflected in the underlying method definition.
      *
-     * @return An {@link org.wmi4j.SWbemObject} object whose properties define the input parameters for this method.
+     * @return An {@link SWbemObject} object whose properties define the input parameters for this method.
      * @throws WMIException
      */
     public SWbemObject getInParameters() throws WMIException {
@@ -81,9 +81,9 @@ public class SWbemMethod extends AbstractScriptingObject {
     }
 
     /**
-     * Returns an {@link org.wmi4j.SWbemQualifierSet} object that is a collection of qualifiers for this WMI method.
+     * Returns an {@link SWbemQualifierSet} object that is a collection of qualifiers for this WMI method.
      * This property is read-only.
-     * @return An {@link org.wmi4j.SWbemQualifierSet} object that is a collection of qualifiers for this WMI method.
+     * @return An {@link SWbemQualifierSet} object that is a collection of qualifiers for this WMI method.
      * @throws WMIException
      */
     public SWbemQualifierSet getQualifiers() throws WMIException {

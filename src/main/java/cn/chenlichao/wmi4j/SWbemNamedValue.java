@@ -17,17 +17,16 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.impls.automation.IJIDispatch;
 
 /**
- * TODO Implement
- * Created by chenlichao on 14-7-17.
+ * todo implement
+ * Created by chenlichao on 14-7-26.
  */
-public class SWbemNamedValueSet extends AbstractWbemSet<SWbemNamedValue> {
-
-    SWbemNamedValueSet(IJIDispatch dispatch) {
+public class SWbemNamedValue extends AbstractScriptingObject {
+    SWbemNamedValue(IJIDispatch dispatch) {
         super(dispatch);
     }
 }

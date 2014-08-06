@@ -19,10 +19,10 @@
 
 package service;
 
-import org.wmi4j.SWbemLocator;
-import org.wmi4j.SWbemObject;
-import org.wmi4j.SWbemServices;
-import org.wmi4j.WMIException;
+import cn.chenlichao.wmi4j.SWbemLocator;
+import cn.chenlichao.wmi4j.SWbemObject;
+import cn.chenlichao.wmi4j.SWbemServices;
+import cn.chenlichao.wmi4j.WMIException;
 
 import java.net.UnknownHostException;
 

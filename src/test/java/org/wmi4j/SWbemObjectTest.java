@@ -19,6 +19,7 @@
 
 package org.wmi4j;
 
+import cn.chenlichao.wmi4j.*;
 import config.Config;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

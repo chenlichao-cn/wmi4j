@@ -17,18 +17,18 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.core.JIString;
 import org.jinterop.dcom.core.JIVariant;
 import org.jinterop.dcom.impls.automation.IJIDispatch;
-import org.wmi4j.consts.WbemCimTypeEnum;
+import cn.chenlichao.wmi4j.consts.WbemCimTypeEnum;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
- * An SWbemPropertySet object is a collection of {@link org.wmi4j.SWbemProperty} objects.
- * You can add items to the collection using the {@link #add(String, org.wmi4j.consts.WbemCimTypeEnum, Boolean, Integer) add()} method,
+ * An SWbemPropertySet object is a collection of {@link SWbemProperty} objects.
+ * You can add items to the collection using the {@link #add(String, cn.chenlichao.wmi4j.consts.WbemCimTypeEnum, Boolean, Integer) add()} method,
  * retrieve items from the collection using the {@link #item(String, Integer) item()} method,
  * and remove items from the collection using the {@link #remove(String, Integer) remove()} method.
  *
@@ -40,17 +40,17 @@ public class SWbemPropertySet extends AbstractWbemSet<SWbemProperty> {
     }
 
     /**
-     * Adds an {@link org.wmi4j.SWbemProperty} object to this collection.
+     * Adds an {@link SWbemProperty} object to this collection.
      * If a property with the same name already exists in the collection, its contents are replaced with the new definition.
      *
      * <p><strong>Note: </strong> The value of the added property is NULL (unassigned) after this operation.
-     * To set or change the value of a WMI property, you must set the value property of the returned {@link org.wmi4j.SWbemProperty} object.</p>
+     * To set or change the value of a WMI property, you must set the value property of the returned {@link SWbemProperty} object.</p>
      *
      * @param name Name of the new property.
-     * @param cimType An integer that represents the CIMType qualifier of the new property. See {@link org.wmi4j.consts.WbemCimTypeEnum}
+     * @param cimType An integer that represents the CIMType qualifier of the new property. See {@link cn.chenlichao.wmi4j.consts.WbemCimTypeEnum}
      * @param isArray <strong>[Optional]</strong> Specifies whether the property is an array type. The default value for this parameter is FALSE.
      * @param flags <strong>[Optional]</strong> Reserved and must be zero if specified.
-     * @return If successful, this method returns an {@link org.wmi4j.SWbemProperty} object that represents the new property.
+     * @return If successful, this method returns an {@link SWbemProperty} object that represents the new property.
      * Otherwise, a null object is returned.
      * @throws WMIException
      */
@@ -70,18 +70,18 @@ public class SWbemPropertySet extends AbstractWbemSet<SWbemProperty> {
     }
 
     /**
-     * Use default parameters for {@link #add(String, org.wmi4j.consts.WbemCimTypeEnum, Boolean, Integer)}
+     * Use default parameters for {@link #add(String, cn.chenlichao.wmi4j.consts.WbemCimTypeEnum, Boolean, Integer)}
      */
     public SWbemProperty add(String name, WbemCimTypeEnum cimType) throws WMIException {
         return add(name, cimType, null, null);
     }
 
     /**
-     * Gets a named {@link org.wmi4j.SWbemProperty} from the collection. This is the default method for this object.
+     * Gets a named {@link SWbemProperty} from the collection. This is the default method for this object.
      *
      * @param name Name of the property to retrieve.
      * @param flags <strong>[Optional]</strong> Reserved and must be zero if specified.
-     * @return If successful, the requested {@link org.wmi4j.SWbemProperty} object is returned.
+     * @return If successful, the requested {@link SWbemProperty} object is returned.
      * @throws WMIException
      */
     public SWbemProperty item(String name, Integer flags) throws WMIException {

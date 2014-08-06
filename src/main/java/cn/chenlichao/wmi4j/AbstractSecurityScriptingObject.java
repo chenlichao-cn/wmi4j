@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package org.wmi4j;
+package cn.chenlichao.wmi4j;
 
 import org.jinterop.dcom.common.JIException;
 import org.jinterop.dcom.core.IJIComObject;
@@ -40,7 +40,7 @@ abstract public class AbstractSecurityScriptingObject extends AbstractScriptingO
      * impersonation, or privilege settings made on a connection to Windows Management Instrumentation (WMI),
      * or the security in effect for the proxy when an object is delivered to a sink in an asynchronous call.
      * <p><strong>Note: </strong> Setting the Security_ property of an SWbemObject object to NULL grants unlimited access to everyone all the time.
-     * For more information, see {@link org.wmi4j.SWbemSecurity}.</p>
+     * For more information, see {@link SWbemSecurity}.</p>
      * @return The security settings of this WMI object.
      * @throws WMIException
      */
